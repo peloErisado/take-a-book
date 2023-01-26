@@ -4,6 +4,7 @@ Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase I
 La página web Take a Book es una aplicación de compra y préstamo de libros de todo tipo.
 
 Las funcionalidades públicas de esta página web serían: ver los libros disponibles que hay para comprar y prestar, ver las valoraciones que hay publicadas de los libros y crear una cuenta de usuario.
+
 Las funcionalidad privadas de Take a Book serán: comprar y prestar libros, escribir valoraciones, seguir a ciertos autores y libros para poder recibir información sobre ellos y administrar la cuenta de usuario.
 
 Take a Book contará con las siguientes entidades:
