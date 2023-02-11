@@ -1,4 +1,4 @@
-package es.take_a_book.application;
+package es.take_a_book.application.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
