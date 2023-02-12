@@ -1,0 +1,58 @@
+html {
+	background-color: var(--background);
+	font-family: calibri;
+}
+
+*{
+	margin: 0px;
+	padding: 0px;
+	--main: #A3A86D;
+	--secondary: #BE996E;
+	--accent: #738054;
+	--background: #EEE3D4;
+	--text: #442E11;
+}
+
+.header{
+	text-align: center;
+	background-color: var(--main);
+}
+
+.title{
+	color: var(--text);
+}
+
+.linkBar{
+  	--margin: 5px 20px;
+  	display: flex;
+  	text-align: center;
+  	background-color: var(--main);
+}
+
+.linkBar-row{
+  	list-style: none;
+}
+
+.linkBar-button{
+	display: inline;
+  	padding: var(--margin);
+}
+
+.linkBar-button:hover{
+ 	background-color: var(--accent);
+}
+
+.linkBar-text{
+	color: var(--text);
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 20px;
+	text-align: center;
+}
+
+.bookDisplay{
+	--margin: 30px;
+	margin: var(--margin);
+	height: 400px;
+	background-color: var(--secondary);
+}
