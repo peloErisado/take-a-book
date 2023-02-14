@@ -14,12 +14,12 @@ public class Purchase {
 	private String payment;
 	
 	@ManyToOne
-	private User user;
+	private Users user;
 	@OneToMany 
 	private List<Book> books;
 	
 	//Constructor
-	public Purchase(User user, List <Book> books, String payment) {
+	public Purchase(Users user, List <Book> books, String payment) {
 		for(int i = 0; i<books.size(); i++) {
 			totalPrice += books.get(i).getPrice();
 		}
@@ -38,7 +38,7 @@ public class Purchase {
 	public String getPayment() {
 		return payment;
 	}
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 	public List<Book> books(){

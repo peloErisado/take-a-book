@@ -1,9 +1,9 @@
 package repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import es.take_a_book.application.model.User;
+import es.take_a_book.application.model.Users;
 
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<Users, String> {
 	
 }

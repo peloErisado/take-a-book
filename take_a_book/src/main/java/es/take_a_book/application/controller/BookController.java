@@ -11,7 +11,7 @@ import repository.BookRepository;
 @RestController
 @RequestMapping("/books")
 public class BookController {
-	/*
+	
 	@Autowired 
 	private BookRepository books;
 	
@@ -25,5 +25,5 @@ public class BookController {
 	public Collection<Book> getBooks(){
 		return books.findAll();
 	}
-	*/
+	
 }

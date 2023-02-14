@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class User {
+public class Users {
 	
 	@Id
 	private String username;
@@ -13,16 +13,15 @@ public class User {
 	private String mail;
 	private String address;
 
-	@OneToMany
+	@OneToMany(mappedBy="user")
 	private List<Purchase> purchases;
-	@OneToMany 
+	@OneToMany(mappedBy="user") 
 	private List<Rating> ratings;
-	@OneToOne
+	@OneToOne(mappedBy="user")
 	private Loan loan;
 	
-	
 	//Constructor
-	public User(String username, String password, String mail, String address) {
+	public Users(String username, String password, String mail, String address) {
 		this.username = username;
 		this.password = password;
 		this.mail = address;

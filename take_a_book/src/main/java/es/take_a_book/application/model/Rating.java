@@ -13,12 +13,12 @@ public class Rating {
 	private int ratingScore;
 	
 	@ManyToOne
-	private User user;
+	private Users user;
 	@ManyToOne
 	private Book book;
 	
 	//Constructor
-	public Rating(Book book, User user, String description, int ratingScore) {
+	public Rating(Book book, Users user, String description, int ratingScore) {
 		this.book = book;
 		this.user = user;
 		this.description = description;
@@ -35,7 +35,7 @@ public class Rating {
 	public int ratingScore() {
 		return ratingScore;
 	}
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 	public Book getBook() {

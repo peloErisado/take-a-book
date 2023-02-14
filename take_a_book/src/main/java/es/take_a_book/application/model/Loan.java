@@ -14,12 +14,12 @@ public class Loan {
 	private String fechaFin;
 	
 	@OneToOne
-	private User user;
+	private Users user;
 	@OneToOne
 	private Book book;
 	
 	//Constructor
-	public Loan(User user, Book book, String fechaInicio, String fechaFin) {
+	public Loan(Users user, Book book, String fechaInicio, String fechaFin) {
 		this.user = user;
 		this.book = book;
 		this.fechaInicio = fechaInicio;
@@ -36,7 +36,7 @@ public class Loan {
 	public String getFechaFin() {
 		return fechaFin;
 	}
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 	public Book getBook() {
@@ -51,7 +51,7 @@ public class Loan {
 	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	public void setBook(Book book) {
