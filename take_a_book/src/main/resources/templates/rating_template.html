@@ -1,0 +1,25 @@
+<html>
+<body>
+	<form method="post" action="rating-form">	//el método post hace que los campos recogidos no aparezcan en la url
+												//si el método es post y se recarga la página, saldrá un aviso preguntando si se desean volver a mandar los parámetros
+													
+		<h2>Escribe tu valoración</h2>
+		<p>Puntuación: </p>
+		<select name='ratingScore'>
+			<option value=1>1</option>
+			<option value=2>2</option>
+			<option value=3>3</option>
+			<option value=4>4</option>
+			<option value=5>5</option>
+			<option value=6>6</option>
+			<option value=7>7</option>
+			<option value=8>8</option>
+			<option value=9>9</option>
+			<option value=10>10</option>
+		</select>
+		
+		<p>Haz un comentario: </p>
+		<input type='textarea' name='description'>
+	</form>
+</body>
+</html>
