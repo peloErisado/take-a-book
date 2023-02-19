@@ -15,16 +15,20 @@ public class Book {
 	private String publisher;
 	private String synopsis;
 	private float price;
-	private int year;
+	private int year_;
 	
-	@ManyToMany(mappedBy = "book")
+	@ManyToMany(mappedBy = "books")
 	private List<Author> authors;
 	@OneToMany
 	private List<Rating> ratings;
 	
+	
 	//Constructor
+	public Book() {
+	}
 	public Book(int ISBN, String title, String genre, String language, String publisher,	
 				String synopsis, float price, int year) {
+		super();
 		this.ISBN = ISBN;
 		this.title = title;
 		this.genre = genre;
@@ -32,7 +36,7 @@ public class Book {
 		this.publisher = publisher;
 		this.synopsis = synopsis;
 		this.price = price;
-		this.year = year;
+		this.year_ = year;
 	}
 	
 
@@ -42,7 +46,7 @@ public class Book {
 		return ISBN;
 	}
 	public int getYear() {
-		return year;
+		return year_;
 	}
 	public float getPrice() {
 		return price;
@@ -71,7 +75,7 @@ public class Book {
 	
 	//Setters
 	public void setYear(int year) {
-		this.year = year;
+		this.year_ = year;
 	}
 	public void setPrice(float price) {
 		this.price = price;
