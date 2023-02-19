@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import repository.BookRepository;
+import es.take_a_book.application.repository.BookRepository;
 
 @SpringBootTest
 class TakeABookApplicationTests {

@@ -22,9 +22,13 @@ public class Book {
 	@OneToMany
 	private List<Rating> ratings;
 	
+	
 	//Constructor
+	public Book() {
+	}
 	public Book(int ISBN, String title, String genre, String language, String publisher,	
 				String synopsis, float price, int year) {
+		super();
 		this.ISBN = ISBN;
 		this.title = title;
 		this.genre = genre;

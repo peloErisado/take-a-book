@@ -1,7 +1,9 @@
 <html>
+	{{>header}}
 <body>
-	<form method="post" action="signup-form">	//el método post hace que los campos recogidos no aparezcan en la url
-												//si el método es post y se recarga la página, saldrá un aviso preguntando si se desean volver a mandar los parámetros
+	
+	<form method="post" action="signup_form">   <!--el método post hace que los campos recogidos no aparezcan en la url-->
+												<!--si el método es post y se recarga la página, saldrá un aviso preguntando si se desean volver a mandar los parámetros-->
 													
 		<h2>Crea tu cuenta</h2>
 		<p>Nombre de usuario: </p>
@@ -14,7 +16,7 @@
 		<input type='text' name='address' placeholder="Cuidad, Provincia, Calle...">
 		
 		<p>Contraseña</p>
-		<input type='text' name='password' placeholder="Contraseña">
+		<input type='password' name='password' placeholder="Contraseña">
 		<input type='submit' value='Enviar'>
 	</form>
 </body>
