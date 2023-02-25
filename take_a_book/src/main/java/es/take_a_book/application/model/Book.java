@@ -17,9 +17,9 @@ public class Book {
 	private float price;
 	private int year_;
 	
-	@ManyToMany(mappedBy = "books")
+	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
 	private List<Author> authors;
-	@OneToMany
+	@OneToMany(mappedBy = "book", cascade=CascadeType.ALL)
 	private List<Rating> ratings;
 	
 	
