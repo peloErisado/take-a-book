@@ -2,15 +2,36 @@
 	{{>header}}
 	
 	<body>
+		
+		<!--Un único libro-->
+		{{^singularBook}}
+		<table>
+			{{#book}}
+			<ul>
+				<il>Título: {{title}}</il>
+				<il>Género: {{genre}}</il>
+				<il>Idioma: {{language}}</il>
+				<il>Publisher: {{publisher}}</il>
+				<il>Sinopsis: {{synopsis}}</il>
+				<il>Precio: {{price}}</il>
+				<il>Año: {{year}}</il>
+			</ul>
+			{{/book}}
+		</table>
+		{{/singularBook}}
+		
+		<!--Varios libros-->
+		{{^singularBook}}
 		<table>
 			{{#books}}
 				<tr>
-					<td>{{title}}</td>
+					<td><a href="/books/{{ISBN}}">{{title}}</a></td>
 					<td>Imagen</td>
 					<td>{{genre}}</td>
 					<td>Autor</td>
 				</tr>
 			{{/books}}
 		</table>
+		{{/singularBook}}
 	</body>
 </html>
