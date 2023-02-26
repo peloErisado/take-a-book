@@ -19,6 +19,10 @@ public class Author {
 	
 	
 	//Constructor
+	public Author() {
+		
+	}
+	
 	public Author(String name, String surnames, String description) {
 		this.name = name;
 		this.surnames = surnames;
@@ -54,6 +58,9 @@ public class Author {
 	}
 	public void setBooks(List<Book> books) {
 		this.books = books;
+	}
+	public void addBook(Book book) {
+		this.books.add(book);
 	}
 	
 }
