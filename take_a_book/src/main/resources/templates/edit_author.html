@@ -1,0 +1,27 @@
+<html>
+	{{>header}}
+	
+	<body>
+		{{#author}}
+		<form method="post" action="/{{id}}/edited">
+			<h2>Edición de autor</h2>
+			
+			<p>Id del autor:</p>
+			<input type="numer" name="id" value="{{id}}" readonly="readonly">
+			
+			<p>Nombre del autor:</p>
+			<input type='text' name='name' value="{{name}}">
+			
+			<p>Apellidos del autor:</p>
+			<input type='text' name='surnames' value="{{surnames}}">
+			
+			<p>Descripción del autor:</p>
+			<input type='text' name='description' value="{{description}}">
+			
+			<p>Libro</p>
+			<input type='number' name='book_ISBN' placeholder="ISBN de libro">
+			<input type='submit' value='Guardar'>
+		</form>
+		{{/author}}
+	</body>
+</html>

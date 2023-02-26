@@ -21,6 +21,10 @@ public class Users {
 	private Loan loan;
 	
 	//Constructor
+	public Users() {
+		
+	}
+	
 	public Users(String username, String password, String mail, String address) {
 		this.username = username;
 		this.password = password;
