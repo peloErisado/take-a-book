@@ -1,0 +1,25 @@
+<html>
+	{{>header}}
+	
+	<body>
+		{{#author}}
+		<table>
+			<ul>
+				<li>Name: {{surnames}}, {{name}}</li>
+				<li>{{description}}</li>
+			</ul>
+		</table>
+		{{/author}}
+		{{#books}}
+		<tr>
+			<td><a href="/books/{ISBN}"></a></td>
+		</tr>
+		{{/books}}
+		
+		{{#author}}
+		<form method="GET" action="{{id}}/edit">
+			<input type="submit" name="action" value="editar">
+		</form>
+		{{/author}}
+	</body>
+</html>

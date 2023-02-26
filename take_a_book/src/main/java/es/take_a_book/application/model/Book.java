@@ -1,6 +1,10 @@
 package es.take_a_book.application.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.sql.Blob;
 import java.util.List;
 
 @Entity
@@ -16,10 +20,16 @@ public class Book {
 	private String synopsis;
 	private float price;
 	private int year_;
+	private String image;
 	
-	@ManyToMany(mappedBy = "books")
+	
+	@Lob
+	@JsonIgnore
+	private Blob imageFile;
+	
+	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
 	private List<Author> authors;
-	@OneToMany
+	@OneToMany(mappedBy = "book", cascade=CascadeType.ALL)
 	private List<Rating> ratings;
 	
 	
@@ -39,7 +49,6 @@ public class Book {
 		this.year_ = year;
 	}
 	
-
 	
 	//Getters
 	public int getISBN() {
@@ -72,8 +81,15 @@ public class Book {
 	public List<Rating> getRatings(){
 		return ratings;
 	}
+	public String getImage() {
+		return image;
+	}
+	public Blob getImageFile() {
+		return imageFile;
+	}
 	
 	//Setters
+	
 	public void setYear(int year) {
 		this.year_ = year;
 	}
@@ -97,6 +113,18 @@ public class Book {
 	}
 	public void setAuthors(List <Author> authors) {
 		this.authors = authors;
+	}
+	public void setImageFile(Blob imageFile) {
+		this.imageFile = imageFile;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public void addRating(Rating rating) {
+		this.ratings.add(rating);
+	}
+	public void addAuthor(Author author) {
+		authors.add(author);
 	}
 	
 }

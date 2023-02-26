@@ -1,0 +1,13 @@
+<html>
+	{{>header}}
+	
+	<body>
+		<table>
+			{{#authors}}
+			<ul>
+				<li><a href="/authors/{{id}}">Name: {{surnames}}, {{name}}</a></li>
+			</ul>
+			{{/authors}}
+		</table>
+	</body>
+</html>
