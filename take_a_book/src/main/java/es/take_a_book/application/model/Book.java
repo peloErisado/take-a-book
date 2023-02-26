@@ -27,9 +27,9 @@ public class Book {
 	@JsonIgnore
 	private Blob imageFile;
 	
-	@ManyToMany(mappedBy = "books")
+	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
 	private List<Author> authors;
-	@OneToMany
+	@OneToMany(mappedBy = "book", cascade=CascadeType.ALL)
 	private List<Rating> ratings;
 	
 	

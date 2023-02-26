@@ -14,7 +14,7 @@ public class Author {
 	private String surnames;
 	private String description;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Book> books;
 	
 	

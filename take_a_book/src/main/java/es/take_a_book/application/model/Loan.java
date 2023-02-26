@@ -13,9 +13,9 @@ public class Loan {
 	private String fechaInicio;
 	private String fechaFin;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Users user;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Book book;
 	
 	//Constructor
