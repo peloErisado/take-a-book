@@ -89,6 +89,7 @@ public class Book {
 	}
 	
 	//Setters
+	
 	public void setYear(int year) {
 		this.year_ = year;
 	}
@@ -118,6 +119,12 @@ public class Book {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+	public void addRating(Rating rating) {
+		this.ratings.add(rating);
+	}
+	public void addAuthor(Author author) {
+		authors.add(author);
 	}
 	
 }

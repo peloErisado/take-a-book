@@ -14,7 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import es.take_a_book.application.model.Author;
 import es.take_a_book.application.model.Book;
+import es.take_a_book.application.service.AuthorService;
 import es.take_a_book.application.service.BookService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +28,9 @@ public class BookController {
 	//private static final String BOOKS_FOLDER = "books";
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private AuthorService authorService;
 	
 	@PostConstruct
 	void init() {
@@ -64,8 +70,15 @@ public class BookController {
 		Optional<Book> book = bookService.findById(ISBN);
 
 		if (book.isPresent()) {
+			if(!book.get().getRatings().isEmpty()) {
+				model.addAttribute("ratings", book.get().getRatings());
+				model.addAttribute("rated", true);
+			}else {
+				model.addAttribute("rated", false);
+			}
 			model.addAttribute("book", book.get());
 			return "showBook";
+			
 		}else {
 			return "showBooks";
 		}
@@ -88,9 +101,9 @@ public class BookController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-/*
-	//UPLOADS: A book's image
 
+	//UPLOADS: A book's image
+/*
 	@PostMapping("/books/{ISBN}/image")
 	public ResponseEntity<Object> uploadImage(@PathVariable int ISBN,
 		 @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
@@ -106,7 +119,48 @@ public class BookController {
 		 return ResponseEntity.created(location).build();
 		 
 	}
-	*/
+*/	
+	@GetMapping("/{ISBN}/edit")
+	public String editAuthor(Model model, @PathVariable int ISBN) {
+		model.addAttribute("book", bookService.findById(ISBN).get());
+		return "edit_book";
+	}
+	
+	@PostMapping("/{ISBN}/edited")
+	public String editedBook(Model model,@PathVariable int ISBN, @PathVariable Optional<String> title, @PathVariable Optional<String> genre,
+			@PathVariable Optional<String> language, @PathVariable Optional<String> publisher, @PathVariable Optional<String> synopsis,
+			@PathVariable Optional<Float> price, @PathVariable Optional<Integer> year, @PathVariable Optional<Long> author_id) throws IOException{
+		
+		model.addAttribute("books", bookService.findAll());
+		
+		Optional<Book> book = bookService.findById(ISBN);
+		
+		if(!book.isPresent()) return "showBooks";
+		
+		if(!title.isEmpty()) book.get().setTitle(title.get());
+		
+		if(!genre.isEmpty()) book.get().setGenre(genre.get());
+		
+		if(!language.isEmpty()) book.get().setLanguage(language.get());
+		
+		if(!publisher.isEmpty()) book.get().setPublisher(publisher.get());
+		
+		if(!synopsis.isEmpty()) book.get().setSynopsis(synopsis.get());
+		
+		if(!price.isEmpty()) book.get().setPrice(price.get());
+		
+		if(!year.isEmpty()) book.get().setYear(year.get());
+		
+		if(!author_id.isEmpty()) {
+			Optional<Author> author = authorService.findById(author_id.get());
+			if(author.isPresent()) bookService.addAuthor(ISBN, author.get());
+		}
+		
+		return "showBooks";
+	}
+
+
+	
 	/*
 	@PostMapping("/books/{id}/image")
 	public ResponseEntity<Object> uploadImage(@PathVariable int ISBN, @RequestParam MultipartFile imageFile) throws IOException {

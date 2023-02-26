@@ -17,10 +17,12 @@ public class Rating {
 	@ManyToOne
 	private Book book;
 	
+	//Default constructor
+	public Rating() {}
 	//Constructor
-	public Rating(Book book, Users user, String description, int ratingScore) {
+	public Rating(Book book, String description, int ratingScore) {
 		this.book = book;
-		this.user = user;
+		//this.user = user;
 		this.description = description;
 		this.ratingScore = ratingScore;
 	}

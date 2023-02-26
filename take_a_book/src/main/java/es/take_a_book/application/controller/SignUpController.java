@@ -18,7 +18,7 @@ import es.take_a_book.application.service.UserService;
 public class SignUpController {
 	
 	@Autowired
-	public UserService userService;
+	private UserService userService;
 	
 	@GetMapping("/signup_presentation")
 	public String signUpPresentation() {

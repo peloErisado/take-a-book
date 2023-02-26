@@ -1,7 +1,7 @@
 <html>
 	{{>header}}
 <body>
-	<form method="post" action="login-form">	<!--el método post hace que los campos recogidos no aparezcan en la url
+	<form method="get" action="/users/login_form">	<!--el método post hace que los campos recogidos no aparezcan en la url
 												si el método es post y se recarga la página, saldrá un aviso preguntando si se desean volver a mandar los parámetros
 												-->	
 		<p>Inicia sesión</p>
@@ -9,5 +9,8 @@
 		<input type='password' name='password' placeholder="Contraseña" required>
 		<input type='submit' value='Iniciar sesión'>
 	</form>
+	{{#invalidLogin}}
+	<p style="color:#FF0000";>Nombre de usuario o contraseña incorrectos</p>
+	{{/invalidLogin}}
 </body>
 </html>

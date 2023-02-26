@@ -1,0 +1,39 @@
+<html>
+	{{>header}}
+	
+	<body>
+		{{#book}}
+		<form method="post" action="/{{ISBN}}/edited">
+			<h2>Edición del libro</h2>
+			
+			<p>Id del autor:</p>
+			<input type="number" name="ISBN" value="{{ISBN}}" readonly="readonly">
+			
+			<p>Título del libro:</p>
+			<input type='text' name='title' value="{{title}}">
+			
+			<p>Género del libro:</p>
+			<input type='text' name='genre' value="{{genre}}">
+			
+			<p>Idioma del libro:</p>
+			<input type='text' name='language' value="{{language}}">
+			
+			<p>Publisher del libro:</p>
+			<input type='text' name='publisher' value="{{publisher}}">
+			
+			<p>Sinopsis del libro:</p>
+			<input type='text' name='synopsis' value="{{synopsis}}">
+			
+			<p>Precio del libro:</p>
+			<input type='number' name='price' value="{{price}}">
+			
+			<p>Año de lanzamiento del libro:</p>
+			<input type='number' name='year' value="{{year}}">
+			
+			<p>Author</p>
+			<input type='number' name='id' placeholder="Autor del libro">
+			<input type='submit' value='Guardar'>
+		</form>
+		{{/book}}
+	</body>
+</html>
