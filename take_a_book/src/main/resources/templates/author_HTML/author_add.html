@@ -1,0 +1,12 @@
+<html>
+	{{>header}}
+	
+	<body>
+		<form method="post" action="/authors/new">
+			<input type="text" name="name" placeholder="Nombre del autor" required>
+			<input type="text" name="surnames" placeholder="Apellidos del autor" required>
+			<input type="text" name="description" placeholder="Descripción del autor" required>
+			<input type="submit" value="Añadir autor">
+		</form>
+	</body>
+</html>

@@ -4,7 +4,7 @@ html {
 }
 
 *{
-	margin: 0px;
+	margin: 30px;
 	padding: 0px;
 	--main: #A3A86D;
 	--secondary: #BE996E;
@@ -51,8 +51,11 @@ html {
 }
 
 .bookDisplay{
-	--margin: 30px;
 	margin: var(--margin);
 	height: 400px;
 	background-color: var(--secondary);
+}
+
+body{
+	margin: var(--margin);
 }
