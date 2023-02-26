@@ -17,6 +17,7 @@ public class SignUpController {
 	public String signUpPresentation() {
 		return "signUp_template";
 	}
+	
 	@PostMapping("/signup_form")
 	public String signUpForm(Model model, @RequestParam String username, @RequestParam String mail, @RequestParam String address, @RequestParam String password) {
 		
