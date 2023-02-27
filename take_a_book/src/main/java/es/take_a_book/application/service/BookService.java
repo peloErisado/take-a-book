@@ -27,8 +27,8 @@ public class BookService {
 		repo.save(book);
 	}
 	
-	public void delete(int id) {
-		repo.deleteById(id);
+	public void delete (Book book) {
+		repo.delete(book);
 	}
 	
 	public void addAuthor (int ISBN, Author author) {

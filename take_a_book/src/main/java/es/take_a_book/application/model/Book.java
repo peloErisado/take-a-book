@@ -2,6 +2,8 @@ package es.take_a_book.application.model;
 
 import javax.persistence.*;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Blob;
