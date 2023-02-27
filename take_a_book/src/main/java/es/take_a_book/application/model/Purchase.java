@@ -14,19 +14,22 @@ public class Purchase {
 	private long billNumber;
 	
 	private float totalPrice = 0;
-	private String payment;
+	private String payment = "";
 	
 	@ManyToOne
 	private Users user;
-	@OneToMany 
-	private List<Book> books;
+	@OneToOne
+	private Book books;
+	
+	public Purchase() {};
 	
 	//Constructor
-	public Purchase(Users user, List <Book> books, String payment) {
-		for(int i = 0; i<books.size(); i++) {
+	public Purchase(/*Users user,*/Book books, String payment) {
+		/*for(int i = 0; i<books.size(); i++) {
 			totalPrice += books.get(i).getPrice();
-		}
-		this.user = user;
+		}*/
+		//this.user = user;
+		totalPrice = books.getPrice();
 		this.books = books;
 		this.payment = payment;
 	}
@@ -44,7 +47,7 @@ public class Purchase {
 	public Users getUser() {
 		return user;
 	}
-	public List<Book> books(){
+	public Book books(){
 		return books;
 	}
 	//Setters

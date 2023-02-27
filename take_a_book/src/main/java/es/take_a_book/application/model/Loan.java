@@ -23,9 +23,11 @@ public class Loan {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Book book;
 	
+	public Loan() {};
+	
 	//Constructor
-	public Loan(Users user, Book book, String fechaInicio, String fechaFin) {
-		this.user = user;
+	public Loan(/*Users user,*/ Book book, String fechaInicio, String fechaFin) {
+		//this.user = user;
 		this.book = book;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
