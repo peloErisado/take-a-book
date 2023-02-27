@@ -4,6 +4,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -32,6 +33,9 @@ public class BookController {
 	@Autowired
 	private AuthorService authorService;
 	
+
+	private String path = "/book_HTML/";
+	
 	@PostConstruct
 	void init() {
 		bookService.save(new Book(9293, "Titulo1", "Genero1", "Lengua1", "Publisher1", "Sinopsis1", (float)18.90, 1923));
@@ -41,7 +45,7 @@ public class BookController {
 	//REDIRECTS: To adding books page
 	@GetMapping("/new")
 	public String showAddBookScreen() {
-		return "addBook";
+		return path+"addBook";
 	}
 	
 	//CREATES: A new book
@@ -52,14 +56,14 @@ public class BookController {
 		Optional <Book> book = bookService.findById(ISBN);
 		//if(!bookService.isPresent()) {
 			bookService.save(new Book(ISBN, title, genre, language, publisher, synopsis, price, year));
-		return "redirect:/books/"+ISBN;
+		return "redirect:"+path+"books/"+ISBN;
 	}
 	
 	//DISPLAYS: Every book
 	@GetMapping("")
 	public String getBooks(Model model){
 		model.addAttribute("books", bookService.findAll());
-		return "showBooks";
+		return path+"showBooks";
 	}
 
 
@@ -77,10 +81,10 @@ public class BookController {
 				model.addAttribute("rated", false);
 			}
 			model.addAttribute("book", book.get());
-			return "showBook";
+			return path+"showBook";
 			
 		}else {
-			return "showBooks";
+			return path+"showBooks";
 		}
 	}
 
@@ -103,7 +107,7 @@ public class BookController {
 	}
 
 	//UPLOADS: A book's image
-/*
+/*¡
 	@PostMapping("/books/{ISBN}/image")
 	public ResponseEntity<Object> uploadImage(@PathVariable int ISBN,
 		 @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
@@ -122,41 +126,43 @@ public class BookController {
 */	
 	@GetMapping("/{ISBN}/edit")
 	public String editAuthor(Model model, @PathVariable int ISBN) {
+		List <Author> authors = authorService.findAll();
+		if(!authors.isEmpty()) {
+			model.addAttribute("allAuthors", authors);
+		}
 		model.addAttribute("book", bookService.findById(ISBN).get());
-		return "edit_book";
+		return path+"edit_book";
 	}
 	
 	@PostMapping("/{ISBN}/edited")
-	public String editedBook(Model model,@PathVariable int ISBN, @PathVariable Optional<String> title, @PathVariable Optional<String> genre,
-			@PathVariable Optional<String> language, @PathVariable Optional<String> publisher, @PathVariable Optional<String> synopsis,
-			@PathVariable Optional<Float> price, @PathVariable Optional<Integer> year, @PathVariable Optional<Long> author_id) throws IOException{
-		
+	public String editedBook(Model model,@PathVariable int ISBN, String title, String genre,
+			String language, String publisher, String synopsis, Float price, Integer year, Long author_id) throws IOException{
 		model.addAttribute("books", bookService.findAll());
 		
 		Optional<Book> book = bookService.findById(ISBN);
 		
 		if(!book.isPresent()) return "showBooks";
 		
-		if(!title.isEmpty()) book.get().setTitle(title.get());
+		book.get().setTitle(title);
 		
-		if(!genre.isEmpty()) book.get().setGenre(genre.get());
+		book.get().setGenre(genre);
 		
-		if(!language.isEmpty()) book.get().setLanguage(language.get());
+		book.get().setLanguage(language);
 		
-		if(!publisher.isEmpty()) book.get().setPublisher(publisher.get());
+		book.get().setPublisher(publisher);
 		
-		if(!synopsis.isEmpty()) book.get().setSynopsis(synopsis.get());
+		book.get().setSynopsis(synopsis);
 		
-		if(!price.isEmpty()) book.get().setPrice(price.get());
+		book.get().setPrice(price);
 		
-		if(!year.isEmpty()) book.get().setYear(year.get());
+		book.get().setYear(year);
 		
-		if(!author_id.isEmpty()) {
-			Optional<Author> author = authorService.findById(author_id.get());
-			if(author.isPresent()) bookService.addAuthor(ISBN, author.get());
-		}
+		Optional<Author> author = authorService.findById(author_id);
+		if(author.isPresent()) bookService.addAuthor(ISBN, author.get());
 		
-		return "showBooks";
+		bookService.save(book.get());
+		
+		return path+"showBooks";
 	}
 
 

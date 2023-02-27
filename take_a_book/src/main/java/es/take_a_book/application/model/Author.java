@@ -45,7 +45,7 @@ public class Author {
 	public List<Book> getBooks(){
 		return books;
 	}
-	
+
 	//Setters
 	public void setName(String name) {
 		this.name = name;
@@ -62,5 +62,5 @@ public class Author {
 	public void addBook(Book book) {
 		this.books.add(book);
 	}
-	
+
 }
