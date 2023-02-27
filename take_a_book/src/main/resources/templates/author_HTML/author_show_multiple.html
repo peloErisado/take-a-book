@@ -4,13 +4,15 @@
 	<body>
 		<table>
 			{{#authors}}
-			<ul>
-				<li><a href="/authors/{{id}}">Name: {{surnames}}, {{name}}</a></li>
+			<ul style="margin-top:20px; margin-left: 1%;list-style-type: none;">
+
+					<li><a href="/authors/{{id}}"> <h2>{{surnames}}, {{name}}</h2></a></li>
+
 			</ul>
 			{{/authors}}
 			
 			<form method="get" action="/authors/new">
-				<input type="submit" value="Añadir autor">
+				<input style = "margin-left: 2%; margin-top: 2%" type="submit" value="Añadir autor">
 			</form>
 		</table>
 	</body>

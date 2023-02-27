@@ -33,16 +33,10 @@ public class BookController {
 	
 	@Autowired
 	private AuthorService authorService;
-	
 
 	private String path = "/book_HTML/";
 	
-	@PostConstruct
-	void init() {
-		bookService.save(new Book(9293, "Titulo1", "Genero1", "Lengua1", "Publisher1", "Sinopsis1", (float)18.90, 1923));
-		bookService.save(new Book(9294, "Titulo2", "Genero2", "Lengua2", "Publisher2", "Sinopsis2", (float)19.90, 1924));
-	}
-	
+
 	//REDIRECTS: To adding books page
 	@GetMapping("/new")
 	public String showAddBookScreen() {
@@ -178,6 +172,7 @@ public class BookController {
 	@GetMapping("/{ISBN}/remove")
 	public String deleteBook(Model model, @PathVariable int ISBN) {
 		Optional<Book> book = bookService.findById(ISBN);
+
 		if(book.isPresent()) bookService.delete(book.get());
 		
 		model.addAttribute("books", bookService.findAll());
