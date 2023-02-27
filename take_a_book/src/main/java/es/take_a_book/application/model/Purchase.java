@@ -19,18 +19,18 @@ public class Purchase {
 	@ManyToOne
 	private Users user;
 	@OneToOne
-	private Book books;
+	private Book book;
 	
 	public Purchase() {};
 	
 	//Constructor
-	public Purchase(/*Users user,*/Book books, String payment) {
+	public Purchase(/*Users user,*/Book book, String payment) {
 		/*for(int i = 0; i<books.size(); i++) {
 			totalPrice += books.get(i).getPrice();
 		}*/
 		//this.user = user;
-		totalPrice = books.getPrice();
-		this.books = books;
+		totalPrice = book.getPrice();
+		this.book = book;
 		this.payment = payment;
 	}
 	
@@ -47,8 +47,8 @@ public class Purchase {
 	public Users getUser() {
 		return user;
 	}
-	public Book books(){
-		return books;
+	public Book getBook(){
+		return book;
 	}
 	//Setters
 	public void setPayment(String payment) {

@@ -72,8 +72,8 @@ public class BookController {
 	}
 /* Region end */
 
-	
-	
+
+
 /* Book creation */
 	//REDIRECTS: To adding books page
 	@GetMapping("/new")
@@ -142,8 +142,10 @@ public class BookController {
 	public String updateBookImage (Model model, @PathVariable Integer ISBN, 
 										@RequestParam MultipartFile image) throws IOException{
 		
+		/*=== Aquí empieza el método ===*/
+		model.addAttribute("books", bookService.findAll());
 		Optional<Book> book = bookService.findById(ISBN);
-		
+	
 		if(book.isEmpty()) {
 			model.addAttribute("books", bookService.findAll());
 			return "redirect:/books";
@@ -207,6 +209,7 @@ public class BookController {
 		return ResponseEntity.ok().build();
 	}
 	
+	
 	@DeleteMapping("/{ISBN}/image")
 	public ResponseEntity<Object> deleteImage (Model model, @PathVariable Integer ISBN) {
 		
@@ -219,7 +222,6 @@ public class BookController {
 		return ResponseEntity.ok().build();
 	}
 /* Region end */
-
 
 
 	@GetMapping("/{ISBN}/loan")

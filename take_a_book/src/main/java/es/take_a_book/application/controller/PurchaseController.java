@@ -35,18 +35,18 @@ public class PurchaseController {
 	@GetMapping("")
 	public String getPurchases(Model model) {
 		model.addAttribute("purchases", purchaseService.findAll());
-		return "purchase_HTML/purchase_show_multiple";
+		return "/purchase_HTML/purchase_show_multiple";
 	}
 	
 	
 	//DISPLAYS: your purchase 
-	@GetMapping("/purchase/{billNumber}")
+	@GetMapping("/{billNumber}")
 	public String getPurchaseSummary(Model model, @PathVariable long billNumber) {
 		Optional<Purchase> purchase = purchaseService.findById(billNumber);
 		
 		if (purchase.isPresent()) {
 			model.addAttribute("book", purchase.get());
-			return "purchase_HTML/showPurchase";
+			return "/purchase_HTML/showPurchase";
 		} else { 
 			return "errorNotFound";
 		}
