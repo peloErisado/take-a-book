@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
+
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -53,10 +54,10 @@ public class BookController {
 	public String addNewBook(@RequestParam int ISBN, @RequestParam String title, @RequestParam String genre,
 			@RequestParam String language, @RequestParam String publisher, @RequestParam String synopsis, @RequestParam float price, 
 			@RequestParam int year){
-		Optional <Book> book = bookService.findById(ISBN);
+		//Optional <Book> book = bookService.findById(ISBN);
 		//if(!bookService.isPresent()) {
 			bookService.save(new Book(ISBN, title, genre, language, publisher, synopsis, price, year));
-		return "redirect:"+path+"books/"+ISBN;
+		return "redirect:/books/"+ISBN;
 	}
 	
 	//DISPLAYS: Every book
@@ -136,7 +137,7 @@ public class BookController {
 	
 	@PostMapping("/{ISBN}/edited")
 	public String editedBook(Model model,@PathVariable int ISBN, String title, String genre,
-			String language, String publisher, String synopsis, Float price, Integer year, Long author_id) throws IOException{
+			String language, String publisher, String synopsis, Float price, Integer year, @RequestParam("author_id") Long author_id) throws IOException{
 		model.addAttribute("books", bookService.findAll());
 		
 		Optional<Book> book = bookService.findById(ISBN);
@@ -158,14 +159,31 @@ public class BookController {
 		book.get().setYear(year);
 		
 		Optional<Author> author = authorService.findById(author_id);
-		if(author.isPresent()) bookService.addAuthor(ISBN, author.get());
-		
+		if(author.isPresent()) { 
+			bookService.addAuthor(ISBN, author.get());
+			authorService.addBook(author_id, book.get());
+		}
 		bookService.save(book.get());
+		authorService.save(author.get());
 		
 		return path+"showBooks";
 	}
 
-
+	@GetMapping("/{ISBN}/remove_confirm")
+	public String deleteBookPage(Model model, @PathVariable int ISBN) {
+		model.addAttribute("book", bookService.findById(ISBN).get());
+		return path+"book_remove";
+	}
+	
+	@GetMapping("/{ISBN}/remove")
+	public String deleteBook(Model model, @PathVariable int ISBN) {
+		Optional<Book> book = bookService.findById(ISBN);
+		if(book.isPresent()) bookService.delete(book.get());
+		
+		model.addAttribute("books", bookService.findAll());
+		
+		return path+"showBooks";
+	}
 	
 	/*
 	@PostMapping("/books/{id}/image")

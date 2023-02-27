@@ -89,10 +89,14 @@ public class AuthorController {
 		
 		if(book_ISBN > 0) {
 			Optional<Book> book = bookService.findById(book_ISBN);
-			if(book.isPresent()) authorService.addBook(id, book.get());
+			if(book.isPresent()) { 
+				authorService.addBook(id, book.get());
+				bookService.addAuthor(book_ISBN, author.get());
+			}
+			bookService.save(book.get());
+			authorService.save(author.get());
 		}
-		
-		authorService.save(author.get());
+	
 		
 		return path+"author_show_multiple";
 	}

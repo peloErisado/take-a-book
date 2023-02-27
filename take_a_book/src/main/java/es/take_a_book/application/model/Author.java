@@ -15,12 +15,12 @@ public class Author {
 	private String description;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
+	//@JoinTable(name = "author_books", joinColumns = @JoinColumn(name = "authors_id"), inverseJoinColumns = @JoinColumn(name = "books_ISBN"))
 	private List<Book> books;
 	
 	
 	//Constructor
 	public Author() {
-		
 	}
 	
 	public Author(String name, String surnames, String description) {

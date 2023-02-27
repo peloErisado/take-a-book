@@ -1,0 +1,12 @@
+<html>
+	{{>header}}
+	
+	<body>
+		{{#book}}
+		<form method="delete" action="/books/{{ISBN}}/remove">
+			<p>¿Estás segur@ de que quieres borrar el libro {{title}} con ISBN {{ISBN}}?</p>
+			<input type="submit" value="Sí, borrar al autor">
+		</form>
+		{{/book}}
+	</body>
+</html>
