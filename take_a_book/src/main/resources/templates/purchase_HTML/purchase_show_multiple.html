@@ -12,8 +12,10 @@
 		<table>
 			{{#purchases}}
 			<tr>
-					<td><a href="/purchase/{{billNumber}}">Número de compra: {{billNumber}}</a></td>
-					<td><a href="/book/{{book.ISBN}}">{{book.title}}</a></td>
+					<td><a>Número de compra: {{billNumber}}</a></td>
+						<td><a href="/books/{{book.ISBN}}">{{book.ISBN}}</a></td>
+						<td>Libro: {{title}}</td>
+
 					<td>Precio: {{totalPrice}}</td>
 			</tr>
 			{{/purchases}}

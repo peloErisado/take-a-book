@@ -17,10 +17,16 @@
 					<li>Sinopsis: {{synopsis}}</li>
 					<li>Precio: {{price}}</li>
 					<li>Año: {{year}}</li>
+					<a>Autores: <a>
+					{{#authors}}
+						<p>{{name}} {{surnames}} </p>
+					{{/authors}}
 					</div>
 				</ul>
 				{{/book}}
+			
 			</table>
+				
 		</div>
 		<div style="margin-left:4%;margin-top:1%">
 			<form method="GET" action="{{ISBN}}/edit">
@@ -28,6 +34,13 @@
 			</form>
 			<form method="GET" action="{{ISBN}}/remove_confirm">
 				<input type="submit" name="action" value="borrar">
+			</form>
+			<form method="GET" action="{{ISBN}}/loan">
+				<input type="submit" name="action" value="pedir préstamo">
+			</form>
+	
+			<form method="GET" action="{{ISBN}}/purchase">
+				<input type="submit" name="action" value="comprar">
 			</form>
 		</div>
 		<div style="margin-top:2%; margin-left:2%">
