@@ -15,24 +15,33 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import es.take_a_book.application.model.Book;
 import es.take_a_book.application.service.BookService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+
 @Controller
 @RequestMapping("/books")
 public class BookController {
+	
+	private String path = "book_HTML/";
 	
 	//private static final String BOOKS_FOLDER = "books";
 	@Autowired
 	private BookService bookService;
 
+	//DISPLAYS: Every book
+	@GetMapping("")
+	public String getBooks(Model model){
+		model.addAttribute("books", bookService.findAll());
+		return path+"showBooks";
+	}
+	
 	//REDIRECTS: To adding books page
 	@GetMapping("/new")
 	public String showAddBookScreen() {
-		return "addBook";
+		return path+"addBook";
 	}
 	
 	//CREATES: A new book
@@ -40,17 +49,12 @@ public class BookController {
 	public String addNewBook(@RequestParam int ISBN, @RequestParam String title, @RequestParam String genre,
 			@RequestParam String language, @RequestParam String publisher, @RequestParam String synopsis, @RequestParam float price, 
 			@RequestParam int year){
+		
 		Optional <Book> book = bookService.findById(ISBN);
-		//if(!bookService.isPresent()) {
-			bookService.save(new Book(ISBN, title, genre, language, publisher, synopsis, price, year));
-		return "redirect:/books/"+ISBN;
-	}
-	
-	//DISPLAYS: Every book
-	@GetMapping("")
-	public String getBooks(Model model){
-		model.addAttribute("books", bookService.findAll());
-		return "showBooks";
+		
+		bookService.save(new Book(ISBN, title, genre, language, publisher, synopsis, price, year));
+		
+		return "redirect:"+path+"/books/"+ISBN;
 	}
 
 
@@ -62,14 +66,13 @@ public class BookController {
 
 		if (book.isPresent()) {
 			model.addAttribute("book", book.get());
-			return "showBook";
+			return path+"showBook";
 		}else {
-			return "showBooks";
+			return path+"showBooks";
 		}
 	}
 
 	//DOWNLOADS: A book's image
-	
 	@GetMapping("/{ISBN}/image")
 	public ResponseEntity<Object> downloadImage(@PathVariable int ISBN) throws SQLException {
 
@@ -108,39 +111,4 @@ public class BookController {
 		
 		return ResponseEntity.ok().build();
 	}
-/*
-	//UPLOADS: A book's image
-
-	@PostMapping("/books/{ISBN}/image")
-	public ResponseEntity<Object> uploadImage(@PathVariable int ISBN,
-		 @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
-		
-		 Book book = bookService.findById(ISBN).orElseThrow();
-		 URI location = fromCurrentRequest().build().toUri();
-		 book.setImage(location.toString());
-	
-		 book.setImageFile(BlobProxy.generateProxy(
-		 imageFile.getInputStream(), imageFile.getSize()));
-		 bookService.save(book);
-		 System.out.printf("Archivo subido");
-		 return ResponseEntity.created(location).build();
-		 
-	}
-	*/
-	/*
-	@PostMapping("/books/{id}/image")
-	public ResponseEntity<Object> uploadImage(@PathVariable int ISBN, @RequestParam MultipartFile imageFile) throws IOException {
-		 Optional <Book> book = bookService.findById(ISBN);
-		 if (book.isPresent()) {
-			 URI location = fromCurrentRequest().build().toUri();
-			 book.get().setImage(location.toString());
-			 bookService.save(book.get());
-			 imgService.saveImage(BOOKS_FOLDER, book.get().getISBN(), imageFile);
-			 return ResponseEntity.created(location).build();
-		 } else {
-		return ResponseEntity.notFound().build();
-		 }
-	}
-	*/
-	
 }

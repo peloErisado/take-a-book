@@ -37,7 +37,12 @@
 			  	{{/allAuthors}}
 			</select>
 			<input type='submit' value='Guardar'>
-			
+		</form>
+		
+		<form method="POST" action="/books/{{ISBN}}/image">
+			<p>Portada del libro:</p>
+			<input type="file" name="image" placeholder="Portada">
+			<input type='submit' value='Subir portada'>
 		</form>
 		{{/book}}
 	</body>
