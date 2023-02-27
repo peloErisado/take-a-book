@@ -10,15 +10,19 @@
 			</ul>
 		</table>
 		{{/author}}
-		{{#books}}
-		<tr>
-			<td><a href="/books/{ISBN}"></a></td>
-		</tr>
-		{{/books}}
-		
+		<table>
+			{{#books}}
+			<ul>
+				<l1><a href="/books/{ISBN}">{{title}}</a></l1>
+			</ul>
+			{{/books}}
+		</table>
 		{{#author}}
 		<form method="GET" action="{{id}}/edit">
 			<input type="submit" name="action" value="editar">
+		</form>
+		<form method="GET" action="{{id}}/remove_confirm">
+			<input type="submit" name="action" value="borrar">
 		</form>
 		{{/author}}
 	</body>
