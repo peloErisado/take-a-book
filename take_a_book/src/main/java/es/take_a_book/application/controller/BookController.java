@@ -102,7 +102,8 @@ public class BookController {
 	
 	@PostMapping("/{ISBN}/edit")
 	public String editedBook(Model model,@PathVariable int ISBN, String title, String genre,
-			String language, String publisher, String synopsis, Float price, Integer year, @RequestParam("author_id") Long author_id) throws IOException{
+			String language, String publisher, String synopsis, Float price, Integer year, 
+			@RequestParam("author_id") Long author_id) throws IOException{
 		
 		/*=== Aquí empieza el método ===*/
 		model.addAttribute("books", bookService.findAll());
@@ -126,6 +127,24 @@ public class BookController {
 		
 		bookService.save(book.get());
 		return path+"showBooks";
+	}
+	
+	@PostMapping("/{ISBN}/edit/image")
+	public String updateBookImage (Model model, @PathVariable Integer ISBN, 
+										@RequestParam MultipartFile image) throws IOException{
+		
+		Optional<Book> book = bookService.findById(ISBN);
+		
+		if(book.isEmpty()) {
+			model.addAttribute("books", bookService.findAll());
+			return "redirect:/books";
+		}
+		
+		book.get().setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+		bookService.save(book.get());
+		model.addAttribute("book", book.get());
+		
+		return "redirect:/books/"+ISBN.toString();
 	}
 /* Region end */
 
@@ -174,12 +193,10 @@ public class BookController {
 		if(book.isEmpty()) return ResponseEntity.notFound().build();
 		/*=======================================*/
 		book.get().setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
-		System.out.println("\n"+image.getSize());
 		bookService.save(book.get());
 		/*=======================================*/
 		return ResponseEntity.ok().build();
 	}
-	
 	
 	@DeleteMapping("/{ISBN}/image")
 	public ResponseEntity<Object> deleteImage (Model model, @PathVariable Integer ISBN) {
