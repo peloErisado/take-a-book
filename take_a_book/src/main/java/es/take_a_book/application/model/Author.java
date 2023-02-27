@@ -1,6 +1,10 @@
 package es.take_a_book.application.model;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.util.List;
 
 @Entity
@@ -15,7 +19,7 @@ public class Author {
 	private String description;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	//@JoinTable(name = "author_books", joinColumns = @JoinColumn(name = "authors_id"), inverseJoinColumns = @JoinColumn(name = "books_ISBN"))
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Book> books;
 	
 	
@@ -61,6 +65,9 @@ public class Author {
 	}
 	public void addBook(Book book) {
 		this.books.add(book);
+	}
+	public void clearBooks() {
+		this.books.clear();
 	}
 
 }

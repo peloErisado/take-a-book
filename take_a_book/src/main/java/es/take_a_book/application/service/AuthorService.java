@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import es.take_a_book.application.model.Author;
 import es.take_a_book.application.model.Book;
 import es.take_a_book.application.repository.AuthorRepository;
+import es.take_a_book.application.repository.BookRepository;
 
 @Service
 public class AuthorService {
@@ -27,6 +28,7 @@ public class AuthorService {
 	}
 	
 	public void delete (Author author) {
+		author.clearBooks();
 		repo.delete(author);
 	}
 	

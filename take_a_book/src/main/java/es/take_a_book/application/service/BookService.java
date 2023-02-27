@@ -28,11 +28,13 @@ public class BookService {
 	}
 	
 	public void delete (Book book) {
+		book.clearAuthors();
 		repo.delete(book);
 	}
 	
-	public void addAuthor (int ISBN, Author author) {
-		repo.findById(ISBN).get().addAuthor(author);
+	public void addAuthor (Book book, Author author) {
+		book.addAuthor(author);
+		author.addBook(book);
 	}
 	
 }

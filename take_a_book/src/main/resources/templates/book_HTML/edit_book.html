@@ -3,7 +3,7 @@
 	
 	<body>
 		{{#book}}
-		<form id = "formulario" method="post" action="/books/{{ISBN}}/edited">
+		<form id = "formulario" method="post" action="/books/{{ISBN}}/edit">
 			<h2>Edición del libro</h2>
 			
 			<p>ISBN del libro:</p>
@@ -37,7 +37,12 @@
 			  	{{/allAuthors}}
 			</select>
 			<input type='submit' value='Guardar'>
-			
+		</form>
+		
+		<form method="POST" action="/books/{{ISBN}}/edit/image" enctype="multipart/form-data">
+			<p>Portada del libro:</p>
+			<input type="file" name="image" accept = "jpg, jpeg, png" placeholder="Portada">
+			<input type='submit' value='Subir portada'>
 		</form>
 		{{/book}}
 	</body>
