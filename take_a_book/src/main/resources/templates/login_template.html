@@ -4,10 +4,19 @@
 	<form method="get" action="/users/login_form">	<!--el método post hace que los campos recogidos no aparezcan en la url
 												si el método es post y se recarga la página, saldrá un aviso preguntando si se desean volver a mandar los parámetros
 												-->	
-		<p>Inicia sesión</p>
-		<input type='text' name='username' placeholder="Nombre de usuario" required>
-		<input type='password' name='password' placeholder="Contraseña" required>
-		<input type='submit' value='Iniciar sesión'>
+	
+		<div style="margin-left:1%; margin-top:1%">
+			<h2>Inicia sesión</h2>
+			<div>
+				<input type='text' name='username' placeholder="Nombre de usuario" required>
+			</div>
+			<div>
+				<input type='password' name='password' placeholder="Contraseña" required>
+			</div>
+			<div style="margin-top:1%">
+				<input type='submit' value='Iniciar sesión'>
+			</div>
+		</div>
 	</form>
 	{{#invalidLogin}}
 	<p style="color:#FF0000";>Nombre de usuario o contraseña incorrectos</p>

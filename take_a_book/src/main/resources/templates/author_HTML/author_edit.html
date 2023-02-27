@@ -3,25 +3,28 @@
 	
 	<body>
 		{{#author}}
-		<form method="post" action="/authors/{{id}}/edit">
-			<h2>Edición de autor</h2>
-			
-			<p>Id del autor:</p>
-			<input type="number" name="id" value="{{id}}" readonly="readonly" required>
-			
-			<p>Nombre del autor:</p>
-			<input type='text' name='name' value="{{name}}" required>
-			
-			<p>Apellidos del autor:</p>
-			<input type='text' name='surnames' value="{{surnames}}">
-			
-			<p>Descripción del autor:</p>
-			<input type='text' name='description' value="{{description}}">
-			
-			<p>Libro</p>
-			<input type='number' name='book_ISBN' value=0>
-			<input type='submit' value='Guardar'>
-		</form>
+		<div style ="margin-left:1%">
+			<form method="post" action="/authors/{{id}}/edit">
+				<h2>Edición de autor</h2>
+				<div style = "margin-left:0.5%">
+					<p>Id del autor:</p>
+					<input type="number" name="id" value="{{id}}" readonly="readonly" required>
+					
+					<p>Nombre del autor:</p>
+					<input type='text' name='name' value="{{name}}" required>
+					
+					<p>Apellidos del autor:</p>
+					<input type='text' name='surnames' value="{{surnames}}">
+					
+					<p>Descripción del autor:</p>
+					<input type='text' name='description' value="{{description}}">
+					
+					<p>Libro</p>
+					<input type='number' name='book_ISBN' value=0>
+					<input type='submit' value='Guardar'>
+				</div>
+			</form>
+		</div>
 		{{/author}}
 	</body>
 </html>

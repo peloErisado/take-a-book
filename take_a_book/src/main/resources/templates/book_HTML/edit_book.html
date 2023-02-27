@@ -3,7 +3,7 @@
 	
 	<body>
 		{{#book}}
-		<form id="editar_libro" method="post" action="/books/{{ISBN}}/edited">
+		<form id = "formulario" method="post" action="/books/{{ISBN}}/edited">
 			<h2>Edición del libro</h2>
 			
 			<p>ISBN del libro:</p>
@@ -31,9 +31,9 @@
 			<input type='number' name='year' value="{{year}}">
 			
 			<p>Author</p>
-			<select form = "editar_libro" name="author_id">
+			<select form = "formulario" name="author_id" id = "author_id">
 				{{#allAuthors}}
-			  		<option value="{{id}}">{{name}}</option>
+			  		<option value="{{id}}"> {{name}}</option>
 			  	{{/allAuthors}}
 			</select>
 			<input type='submit' value='Guardar'>

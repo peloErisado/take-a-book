@@ -2,62 +2,73 @@
 	{{>header}}
 	
 	<body>
-		<div>
+		
 			<table>
 				{{#book}}
-				<ul>
-					<li><h2>Título: {{title}}</h2></li>
-					<li><img src="/books/{ISBN}/image"><li>
+				<ul style = "margin-left:1%;margin-top:1%; list-style-type: none">
+					<div style = "margin-left:1%">
+						<li><h1>Título: {{title}}</h1></li>
+						<li><img src="/books/{ISBN}/image"><li>
+					</div>
+					<div style = "margin-left:2%">
 					<li>Género: {{genre}}</li>
 					<li>Idioma: {{language}}</li>
 					<li>Publisher: {{publisher}}</li>
 					<li>Sinopsis: {{synopsis}}</li>
 					<li>Precio: {{price}}</li>
 					<li>Año: {{year}}</li>
+					</div>
 				</ul>
 				{{/book}}
 			</table>
 		</div>
-		<div>
+		<div style="margin-left:4%;margin-top:1%">
 			<form method="GET" action="{{ISBN}}/edit">
 			<input type="submit" name="action" value="editar">
-		</form>
+			</form>
+			<form method="GET" action="{{ISBN}}/remove_confirm">
+				<input type="submit" name="action" value="borrar">
+			</form>
 		</div>
-		<div>
-			<form method="post" action="/rating_form">	
-				<h2>Escribe tu valoración</h2>
-				<p>Puntuación: </p>
-				<select name='ratingScore'>
-					<option value=1>1</option>
-					<option value=2>2</option>
-					<option value=3>3</option>
-					<option value=4>4</option>
-					<option value=5>5</option>
-					<option value=6>6</option>
-					<option value=7>7</option>
-					<option value=8>8</option>
-					<option value=9>9</option>
-					<option value=10>10</option>
-				</select>
-				<p>Haz un comentario: </p>
-				<input type='textarea' name='description'>
-				<input type='submit' value='Aceptar'>
-				<input type='hidden' id= 'hiddenField' name='ISBN' value='{{book.ISBN}}'/>	
-			</form>		
-			<h2>VALORACIONES</h2>
-				{{#rated}}
-					{{#ratings}}
-						<table>
-						<ul>
-							<li>Puntuación: {{ratingScore}}/10</li>
-							<li>Comentario: {{description}}</li>
-						</ul>
-						</table>
-					{{/ratings}}
-				{{/rated}}
-				{{^rated}}
-					<p> Todavia no hay comentarios para este libro </p>
-				{{/rated}}
+		<div style="margin-top:2%; margin-left:2%">
+			<div style= "margin-bottom:2%">
+				<form method="post" action="/rating_form">	
+					<h2>Escribe tu valoración</h2>
+					<p>Puntuación: </p>
+					<select name='ratingScore'>
+						<option value=1>1</option>
+						<option value=2>2</option>
+						<option value=3>3</option>
+						<option value=4>4</option>
+						<option value=5>5</option>
+						<option value=6>6</option>
+						<option value=7>7</option>
+						<option value=8>8</option>
+						<option value=9>9</option>
+						<option value=10>10</option>
+					</select>
+					<p>Haz un comentario: </p>
+					<input type='textarea' name='description'>
+					<input type='submit' value='Aceptar'>
+					<input type='hidden' id= 'hiddenField' name='ISBN' value='{{book.ISBN}}'/>	
+				</form>	
+			</div>	
+			<div style="margin-left:2%">
+				<h2>VALORACIONES</h2>
+					{{#rated}}
+						{{#ratings}}
+							<table> <h3> Comentario {{-index}} </h3>
+							<ul style = "margin-left:1%">
+								<li>Puntuación: {{ratingScore}}/10</li>
+								<li>Comentario: {{description}}</li>
+							</ul>
+							</table>
+						{{/ratings}}
+					{{/rated}}
+					{{^rated}}
+						<p> Todavia no hay comentarios para este libro </p>
+					{{/rated}}
+			</div>
 		</div>
 		
 		<div>

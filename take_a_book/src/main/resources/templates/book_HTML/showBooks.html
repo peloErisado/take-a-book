@@ -23,18 +23,20 @@
 		<!--Varios libros-->
 		{{^singularBook}}
 		<table>
+			
 			{{#books}}
-				<tr>
-					<td><a href="/books/{{ISBN}}">{{title}}</a></td>
-					<td>Imagen</td>
-					<td>{{genre}}</td>
-					<td>Autor</td>
-				</tr>
+			
+			<ul style="margin-top:20px; margin-left: 2.5%; list-style-type: none">
+					<li><a href="/books/{{ISBN}}"><h2>{{title}}</h2></a></li>
+					<li>Imagen</li>
+					<li>{{genre}}</li>
+					<li>Autor</li>
+			</ul>
 			{{/books}}
 		</table>
 		{{/singularBook}}
 		<form method = "get" action = "/books/new">
-			<input type='submit' value='Añadir libros'>
+			<input  style = "margin-left: 2%; margin-top: 2%" type='submit' value='Añadir libros'>
 		</form>
 			
 	</body>
