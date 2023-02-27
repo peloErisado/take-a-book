@@ -20,8 +20,17 @@
 		</div>
 		<div>
 			<form method="GET" action="{{ISBN}}/edit">
-			<input type="submit" name="action" value="editar">
-		</form>
+				<input type="submit" name="action" value="editar">
+			</form>
+			
+			<form method="GET" action="{{ISBN}}/loan">
+				<input type="submit" name="action" value="pedir préstamo">
+			</form>
+			
+			<form method="GET" action="{{ISBN}}/purchase">
+				<input type="submit" name="action" value="comprar">
+			</form>
+			
 		</div>
 		<div>
 			<form method="post" action="/rating_form">	

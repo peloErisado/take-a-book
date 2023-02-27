@@ -18,9 +18,11 @@ public class Loan {
 	@OneToOne(cascade=CascadeType.ALL)
 	private Book book;
 	
+	public Loan() {};
+	
 	//Constructor
-	public Loan(Users user, Book book, String fechaInicio, String fechaFin) {
-		this.user = user;
+	public Loan(/*Users user,*/ Book book, String fechaInicio, String fechaFin) {
+		//this.user = user;
 		this.book = book;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
