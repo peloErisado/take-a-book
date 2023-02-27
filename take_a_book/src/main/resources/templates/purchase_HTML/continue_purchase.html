@@ -1,0 +1,12 @@
+<html>
+	{{>header}}
+	<body>
+		<h1>¡Gracias por usar nuestros servicios!</h1>
+		
+		<h2>Por favor, termina tu compra haciendo click</h2>
+		
+		<form method="GET" action="/purchase/{{purchase.billNumber}}">
+				<input type="submit" name="action" value="Aquí">
+		</form>
+	</body>
+</html>

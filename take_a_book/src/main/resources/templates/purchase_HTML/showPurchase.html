@@ -1,0 +1,25 @@
+<html>
+	{{>header}}
+	
+	<body>
+		
+		<h2>Aquí tienes un resumen de tu compra</h2>
+	
+		<p>Producto: {{book.title}}</p>
+		<p>Precio total: {{purchase.totalPrice}}</p>
+		<p>Número de factura: {{purchase.billNumber}}</p>
+		
+		<form method="post" action="/purchase/finish_purchase/{{purchase.billNumber}}">
+		Selecciona el método de pago que deseas utilizar:
+		<br/>
+		<input name='payment' type='radio' value="PayPal"/>PayPal
+		<br/>
+		<input name='payment' type='radio' value="Tarjeta de crédito o débito"/>Tarjeta de crédito o débito
+		<br/>
+		<input name='payment' type='radio' value="Transferencia bancaria"/>Transferencia bancaria
+		
+		<input type='submit' value='Terminar compra'>
+	</form>
+		
+	</body>
+</html>

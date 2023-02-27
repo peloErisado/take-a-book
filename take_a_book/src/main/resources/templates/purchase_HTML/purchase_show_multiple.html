@@ -1,0 +1,23 @@
+<html>
+	{{>header}}
+	
+	<body>
+		<nav class="linkBar">
+        	<ul class="linkBar-row">
+				<li class = "linkBar-button"><a class="linkBar-text" href="/loan">Mis préstamos</a></li>
+          		<li class = "linkBar-button"><a class="linkBar-text" href="/purchase">Mis compras</a></li>
+        	</ul>
+    	</nav>
+    	
+		<table>
+			{{#purchases}}
+			<tr>
+					<td><a href="/purchase/{{billNumber}}">Número de compra: {{billNumber}}</a></td>
+					<td><a href="/book/{{book.ISBN}}">{{book.title}}</a></td>
+					<td>Precio: {{totalPrice}}</td>
+			</tr>
+			{{/purchases}}
+			
+		</table>
+	</body>
+</html>
