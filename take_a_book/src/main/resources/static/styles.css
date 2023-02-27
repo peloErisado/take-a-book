@@ -4,6 +4,7 @@ html {
 }
 
 *{
+	margin: 0px;
 	padding: 0px;
 	--main: #A3A86D;
 	--secondary: #BE996E;
@@ -65,4 +66,8 @@ html {
 	margin: var(--margin);
 	height: 400px;
 	background-color: var(--secondary);
+}
+
+body{
+	margin: 10px;
 }

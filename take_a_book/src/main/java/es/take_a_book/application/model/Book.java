@@ -2,6 +2,8 @@ package es.take_a_book.application.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,8 +32,10 @@ public class Book {
 	private Blob imageFile;
 	
 	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Author> authors;
 	@OneToMany(mappedBy = "book", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Rating> ratings;
 	
 	
@@ -126,7 +130,10 @@ public class Book {
 		this.ratings.add(rating);
 	}
 	public void addAuthor(Author author) {
-		authors.add(author);
+		this.authors.add(author);
+	}
+	public void clearAuthors() {
+		this.authors.clear();
 	}
 	
 }

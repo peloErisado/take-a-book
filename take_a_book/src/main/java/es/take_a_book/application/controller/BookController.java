@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import es.take_a_book.application.model.Author;
 import es.take_a_book.application.model.Book;
 import es.take_a_book.application.model.Loan;
@@ -26,33 +25,28 @@ import es.take_a_book.application.service.AuthorService;
 import es.take_a_book.application.service.BookService;
 import es.take_a_book.application.service.LoanService;
 import es.take_a_book.application.service.PurchaseService;
-
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+
 @Controller
 @RequestMapping("/books")
 public class BookController {
-	/* Controller variables region */
-	
+
+/* Controller variables region */
 	private String path = "book_HTML/";
 	@Autowired
 	private BookService bookService;
-	
 	@Autowired
 	private AuthorService authorService;
-	
-	@Autowired
+  @Autowired
 	private LoanService loanService;
-	
 	@Autowired 
 	private PurchaseService purchaseService;
-	
-	/* Region end */
-	//REDIRECTS: To adding books page
-	
+/* Region end */
 
-
+	
+  
 /* Book display */
 	//DISPLAYS: Every book
 	@GetMapping("")
@@ -68,7 +62,6 @@ public class BookController {
 		Optional<Book> book = bookService.findById(ISBN);
 
 		if (book.isPresent()) {
-			model.addAttribute("authors", book.get().getAuthors());
 			model.addAttribute("book", book.get());
 			model.addAttribute("ratings", book.get().getRatings());
 			model.addAttribute("rated", !book.get().getRatings().isEmpty());
@@ -78,6 +71,7 @@ public class BookController {
 		}
 	}
 /* Region end */
+
 
 
 /* Book creation */
@@ -117,7 +111,8 @@ public class BookController {
 	
 	@PostMapping("/{ISBN}/edit")
 	public String editedBook(Model model,@PathVariable int ISBN, String title, String genre,
-			String language, String publisher, String synopsis, Float price, Integer year, @RequestParam("author_id") Long author_id) throws IOException{
+			String language, String publisher, String synopsis, Float price, Integer year, 
+			@RequestParam("author_id") Long author_id) throws IOException{
 		
 		/*=== Aquí empieza el método ===*/
 		model.addAttribute("books", bookService.findAll());
@@ -136,11 +131,31 @@ public class BookController {
 		Optional<Author> author = authorService.findById(author_id);
 		
 		if(author.isPresent()) { 
-			bookService.addAuthor(ISBN, author.get());
+			bookService.addAuthor(book.get(), author.get());
 		}
 		
 		bookService.save(book.get());
 		return path+"showBooks";
+	}
+	
+	@PostMapping("/{ISBN}/edit/image")
+	public String updateBookImage (Model model, @PathVariable Integer ISBN, 
+										@RequestParam MultipartFile image) throws IOException{
+		
+		/*=== Aquí empieza el método ===*/
+		model.addAttribute("books", bookService.findAll());
+		Optional<Book> book = bookService.findById(ISBN);
+	
+		if(book.isEmpty()) {
+			model.addAttribute("books", bookService.findAll());
+			return "redirect:/books";
+		}
+		
+		book.get().setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+		bookService.save(book.get());
+		model.addAttribute("book", book.get());
+		
+		return "redirect:/books/"+ISBN.toString();
 	}
 /* Region end */
 
@@ -189,7 +204,6 @@ public class BookController {
 		if(book.isEmpty()) return ResponseEntity.notFound().build();
 		/*=======================================*/
 		book.get().setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
-		System.out.println("\n"+image.getSize());
 		bookService.save(book.get());
 		/*=======================================*/
 		return ResponseEntity.ok().build();
@@ -208,8 +222,8 @@ public class BookController {
 		return ResponseEntity.ok().build();
 	}
 /* Region end */
-	
-/* Loan and purchase services region */
+
+
 	@GetMapping("/{ISBN}/loan")
 	public String loanBook(@PathVariable int ISBN) {
 		
@@ -219,11 +233,12 @@ public class BookController {
 		LocalDate fin = inicio.plusMonths(2);
 		
 		loanService.save(new Loan(book.get(),inicio.toString(), fin.toString()));
-		return "/loan_HTML/loan_complete";
+		return "loan_HTML/loan_complete";
 	}
 	
 	@GetMapping("/{ISBN}/purchase")
 	public String purchaseBook(Model model, @PathVariable int ISBN) {
+		
 		Optional<Book> book = bookService.findById(ISBN);
 		
 		Purchase p = new Purchase(book.get(), "");
@@ -233,8 +248,6 @@ public class BookController {
 		model.addAttribute("purchase", p);
 		model.addAttribute("book", book.get());
 	
-		return "/purchase_HTML/showPurchase";
+		return "purchase_HTML/showPurchase";
 	}
-/* Region end */
-	
 }
