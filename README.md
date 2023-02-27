@@ -1,5 +1,5 @@
 # TAKE A BOOK
-Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase I
+# Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase I
 
 ## Índice
 
@@ -11,6 +11,10 @@ Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase I
   - [Servicio web](#funcionalidades-web) :globe_with_meridians:
  - [Entidades](#entidades) :raising_hand:
  - [Herramientas](#herramientas) :hammer:
+ - [Capturas de pantalla](#capturas-de-pantalla) :computer:
+ - [Diagrama de navegación](#diagrama-de-navegacion) :file_folder:
+ - [Diagrama de clases UML](#diagrama-de-clases-UML) :chart:
+ - [Diagrama Entidad/Relación](#diagrama-entidad-relacion) :floppy_disk:
 
 ## Información
 La página web Take a Book es una aplicación de compra y préstamo de libros de todo tipo.
@@ -40,3 +44,18 @@ Take a Book contará con las siguientes entidades:
 
 ## Herramientas
 Durante el desarrollo de este proyecto se hará uso de un tablero de Trello: https://trello.com/w/takeabook 
+
+
+# Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase II
+
+## Capturas de pantalla de la aplicación
+
+## Diagrama de navegación
+
+## Diagrama de clases UML
+
+## Diagrama Entidad/Relación
+
+
+
+
