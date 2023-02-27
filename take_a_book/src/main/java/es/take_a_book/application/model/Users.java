@@ -2,6 +2,9 @@ package es.take_a_book.application.model;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 
 @Entity
 public class Users {
@@ -15,7 +18,7 @@ public class Users {
 
 	@OneToMany(mappedBy="user")
 	private List<Purchase> purchases;
-	@OneToMany(mappedBy="user") 
+	@OneToMany(mappedBy="user")
 	private List<Rating> ratings;
 	@OneToOne(mappedBy="user")
 	private Loan loan;

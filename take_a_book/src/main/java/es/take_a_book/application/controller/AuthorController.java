@@ -25,15 +25,15 @@ import org.springframework.http.HttpHeaders;
 @RequestMapping("/authors")
 public class AuthorController {
 	
+/* Controller variables */
+	private String path = "author_HTML/";
 	@Autowired
 	private AuthorService authorService;
-	
 	@Autowired
 	private BookService bookService;
+/* Region end */
 	
-	private String path = "author_HTML/";
-	
-	//Authors
+
 	@GetMapping("")
 	public String getAuthors(Model model) {
 		model.addAttribute("authors", authorService.findAll());
@@ -91,9 +91,9 @@ public class AuthorController {
 			Optional<Book> book = bookService.findById(book_ISBN);
 			if(book.isPresent()) { 
 				authorService.addBook(id, book.get());
-				bookService.addAuthor(book_ISBN, author.get());
+				//bookService.addAuthor(book_ISBN, author.get());
 			}
-			bookService.save(book.get());
+			//bookService.save(book.get());
 			authorService.save(author.get());
 		}
 	

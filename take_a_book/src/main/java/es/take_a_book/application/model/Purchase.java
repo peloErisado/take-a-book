@@ -3,6 +3,9 @@ package es.take_a_book.application.model;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 public class Purchase {
 	
