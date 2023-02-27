@@ -41,7 +41,7 @@
 		
 		<form method="POST" action="/books/{{ISBN}}/image">
 			<p>Portada del libro:</p>
-			<input type="file" name="image" placeholder="Portada">
+			<input type="file" name="image" accept = "jpg, jpeg, png" placeholder="Portada">
 			<input type='submit' value='Subir portada'>
 		</form>
 		{{/book}}

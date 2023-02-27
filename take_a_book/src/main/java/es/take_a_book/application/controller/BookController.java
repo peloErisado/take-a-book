@@ -168,8 +168,8 @@ public class BookController {
 	
 	@PostMapping("/{ISBN}/image")
 	public ResponseEntity<Object> uploadImage (Model model, @PathVariable Integer ISBN, 
-										@RequestBody MultipartFile image) throws IOException {
-		
+										@RequestParam MultipartFile image) throws IOException {
+
 		Optional<Book> book = bookService.findById(ISBN);
 		if(book.isEmpty()) return ResponseEntity.notFound().build();
 		/*=======================================*/
@@ -179,6 +179,7 @@ public class BookController {
 		/*=======================================*/
 		return ResponseEntity.ok().build();
 	}
+	
 	
 	@DeleteMapping("/{ISBN}/image")
 	public ResponseEntity<Object> deleteImage (Model model, @PathVariable Integer ISBN) {
@@ -192,7 +193,4 @@ public class BookController {
 		return ResponseEntity.ok().build();
 	}
 /* Region end */
-	
-	
-	
 }
