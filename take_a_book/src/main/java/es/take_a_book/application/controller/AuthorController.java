@@ -97,7 +97,6 @@ public class AuthorController {
 			authorService.save(author.get());
 		}
 	
-		
 		return path+"author_show_multiple";
 	}
 	

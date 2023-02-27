@@ -9,6 +9,7 @@ public class HomeController {
 	
 	@GetMapping("/home")
 	public String home(Model model) {
+		model.addAttribute("texto", "Aquí encontrarás las últimas noticias sobre libros publicados");
 		return "home";
 	}
 }

@@ -14,8 +14,10 @@ html {
 }
 
 .header{
+	display: flex;
 	text-align: center;
 	background-color: var(--main);
+	align-items: center;
 }
 
 .title{
@@ -25,10 +27,20 @@ html {
 .linkBar{
   	--margin: 5px 20px;
   	display: flex;
-  	text-align: center;
+  	flex-wrap: wrap;
+  	align-content: space-between;
   	background-color: var(--main);
 }
-
+   
+.separacion{
+	padding: 20% 20%;
+}
+.center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 .linkBar-row{
   	list-style: none;
 }
