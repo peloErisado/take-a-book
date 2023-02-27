@@ -28,9 +28,11 @@
 			
 			<ul style="margin-top:20px; margin-left: 2.5%; list-style-type: none">
 					<li><a href="/books/{{ISBN}}"><h2>{{title}}</h2></a></li>
-					<li>Imagen</li>
+					<li><img src="/books/{ISBN}}/image"></li>
 					<li>{{genre}}</li>
-					<li>Autor</li>
+					{{#authors}}
+						<li>{{surnames}}, {{name}}</li>
+					{{/authors}}
 			</ul>
 			{{/books}}
 		</table>
