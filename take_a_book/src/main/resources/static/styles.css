@@ -68,6 +68,10 @@ html {
 	background-color: var(--secondary);
 }
 
+.mainImage{
+	height: 120px;
+}
+
 body{
 	margin: 10px;
 }

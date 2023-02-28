@@ -8,7 +8,7 @@
 				<ul style = "margin-left:1%;margin-top:1%; list-style-type: none">
 					<div style = "margin-left:1%">
 						<li><h1>Título: {{title}}</h1></li>
-						<<li><img src="/books/{{ISBN}}/image"><li>
+						<li><img height="320px" src="/books/{{ISBN}}/image"><li>
 					</div>
 					<div style = "margin-left:2%">
 					<li>Género: {{genre}}</li>
@@ -30,7 +30,6 @@
 		</div>
 		<div style="margin-left:4%;margin-top:1%">
 			<form method="GET" action="{{ISBN}}/edit">
-
 				<input type="submit" name="action" value="editar">
 			</form>
 			
@@ -42,17 +41,8 @@
 				<input type="submit" name="action" value="comprar">
 			</form>
 
-			<input type="submit" name="action" value="editar">
-			</form>
 			<form method="GET" action="{{ISBN}}/remove_confirm">
 				<input type="submit" name="action" value="borrar">
-			</form>
-			<form method="GET" action="{{ISBN}}/loan">
-				<input type="submit" name="action" value="pedir préstamo">
-			</form>
-	
-			<form method="GET" action="{{ISBN}}/purchase">
-				<input type="submit" name="action" value="comprar">
 			</form>
 		</div>
 		<div style="margin-top:2%; margin-left:2%">
