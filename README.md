@@ -12,9 +12,9 @@
  - [Entidades](#entidades) :raising_hand:
  - [Herramientas](#herramientas) :hammer:
  - [Capturas de pantalla](#capturas-de-pantalla) :computer:
- - [Diagrama de navegación](#diagrama-de-navegacion) :file_folder:
+ - [Diagrama de navegación](#diagrama-de-navegación) :file_folder:
  - [Diagrama de clases UML](#diagrama-de-clases-UML) :chart:
- - [Diagrama Entidad/Relación](#diagrama-entidad-relacion) :floppy_disk:
+ - [Diagrama Entidad/Relación](#diagrama-entidad-relación) :floppy_disk:
 
 ## Información
 La página web Take a Book es una aplicación de compra y préstamo de libros de todo tipo.
@@ -50,12 +50,48 @@ Durante el desarrollo de este proyecto se hará uso de un tablero de Trello: htt
 
 ## Capturas de pantalla de la aplicación
 
+- Pantalla principal
+
+![Pantalla principal](https://media.discordapp.net/attachments/1074012790051848212/1079916490616221718/image.png?width=993&height=559)
+
+- Pantalla de autores
+
+![Pantalla de autores](https://media.discordapp.net/attachments/1074012790051848212/1079917383029887076/image.png?width=993&height=559)
+
+- Pantalla de libros
+
+![Pantalla de libros](https://media.discordapp.net/attachments/1074012790051848212/1079916030010343594/image.png?width=993&height=559)
+
+- Pantalla de un libro concreto 
+
+![Pantalla de libro](https://media.discordapp.net/attachments/1074012790051848212/1079916135492890645/image.png?width=993&height=559)
+
+- Pantalla de registro
+
+![Pantalla de registro](https://media.discordapp.net/attachments/1074012790051848212/1079917454232391750/image.png?width=993&height=559)
+
+- Pantalla de inicio de sesión
+
+![Pantalla de inicio de sesión](https://media.discordapp.net/attachments/1074012790051848212/1079917469134766151/image.png?width=993&height=559)
+
+- Pantalla de mis pedidos
+
+![Pantalla de mis compras](https://media.discordapp.net/attachments/1074012790051848212/1079916200634630214/image.png?width=993&height=559)
+
+- Pantalla de compra
+
+![Pantalla de compra](https://media.discordapp.net/attachments/1074012790051848212/1079917663679168532/image.png?width=993&height=559)
+
 ## Diagrama de navegación
+
+![Diagrama de navegación](https://github.com/peloErisado/take-a-book/blob/main/images_Readme/DiagramaNavegacion.drawio.png?raw=true)
 
 ## Diagrama de clases UML
 
+![Diagrama de navegación](https://github.com/peloErisado/take-a-book/blob/main/images_Readme/Diagrama%20de%20clase.drawio.png?raw=true)
+
 ## Diagrama Entidad/Relación
 
-
+![Diagrama de navegación](https://github.com/peloErisado/take-a-book/blob/main/images_Readme/DiagramaER.drawio.png?raw=true)
 
 
