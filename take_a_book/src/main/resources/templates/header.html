@@ -12,9 +12,16 @@
 				<li class = "linkBar-button"><a class="linkBar-text" href="/home">Novedades</a></li>
           		<li class = "linkBar-button"><a class="linkBar-text" href="/authors">Autores</a></li>
           		<li class = "linkBar-button"><a class="linkBar-text" href="/books">Libros</a></li>
+      			{{^mv_logged}}
           		<li class = "linkBar-button"><a class="linkBar-text" href="/users/signup_presentation">Registrarse</a></li>
 				<li class = "linkBar-button"><a class="linkBar-text" href="/users/login_template"> Iniciar Sesión</a></li> 
-				<li class = "linkBar-button"><a class="linkBar-text" href="/orders"> Mis pedidos</a></li> 
+				{{/mv_logged}}
+				{{#mv_logged}}
+					<li class = "linkBar-button"><a class="linkBar-text" href="/purchase/cart"> Carrito </a></li> 
+					<li class = "linkBar-button"><a class="linkBar-text" href="/orders"> Mis pedidos</a></li> 
+					<li class = "linkBar-button"><a class="linkBar-text"> {{mv_username}} </a> </li>
+					<li class = "linkBar-button"><a class="linkBar-text" href="/users/logout">Cerrar sesión</a></li>
+				{{/mv_logged}}
         	</ul>
       	</nav>
   	</body>

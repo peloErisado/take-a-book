@@ -37,7 +37,11 @@ public class Book {
 	@OneToMany(mappedBy = "book", cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Rating> ratings;
+	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<Purchase> purchases;
 	
+
 	
 	//Constructor
 	public Book() {
@@ -92,6 +96,9 @@ public class Book {
 	}
 	public Blob getImageFile() {
 		return imageFile;
+	}
+	public List<Purchase> getPurchases(){
+		return purchases;
 	}
 	
 	//Setters

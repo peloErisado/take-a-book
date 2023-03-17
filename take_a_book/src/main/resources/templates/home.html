@@ -2,6 +2,9 @@
 	{{>header}}
 	<body>
 		<p>{{texto}}</p>
+		{{#mv_logged}}
+			<p>Usuario conectado: {{mv_username}} tiene rol: {{mv_admin}}</p>
+		{{/mv_logged}}
 	</body>
 	
 </html>

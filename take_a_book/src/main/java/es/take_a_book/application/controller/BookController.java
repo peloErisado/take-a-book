@@ -1,13 +1,11 @@
 package es.take_a_book.application.controller;
 
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 import java.io.IOException;
-import java.net.URI;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import javax.annotation.PostConstruct;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -16,18 +14,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import es.take_a_book.application.model.Author;
 import es.take_a_book.application.model.Book;
 import es.take_a_book.application.model.Loan;
 import es.take_a_book.application.model.Purchase;
+import es.take_a_book.application.model.Users;
 import es.take_a_book.application.service.AuthorService;
 import es.take_a_book.application.service.BookService;
 import es.take_a_book.application.service.LoanService;
 import es.take_a_book.application.service.PurchaseService;
+import es.take_a_book.application.service.UserService;
+
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+
 
 @Controller
 @RequestMapping("/books")
@@ -39,10 +39,12 @@ public class BookController {
 	private BookService bookService;
 	@Autowired
 	private AuthorService authorService;
-  @Autowired
+	@Autowired
 	private LoanService loanService;
 	@Autowired 
 	private PurchaseService purchaseService;
+	@Autowired 
+	private UserService userService;
 /* Region end */
 
 	
@@ -225,25 +227,44 @@ public class BookController {
 
 
 	@GetMapping("/{ISBN}/loan")
-	public String loanBook(@PathVariable int ISBN) {
+	public String loanBook(@PathVariable int ISBN, @RequestParam String username) {
 		
+		Optional<Users> user = userService.findById(username);
 		Optional<Book> book = bookService.findById(ISBN);
 		
 		LocalDate inicio = LocalDate.now();
 		LocalDate fin = inicio.plusMonths(2);
 		
-		loanService.save(new Loan(book.get(),inicio.toString(), fin.toString()));
+		Loan loan = new Loan(user.get(), book.get(), inicio.toString(), fin.toString());
+		user.get().getLoans().add(loan);
+		
+		loanService.save(loan);
+		userService.save(user.get());
 		return "loan_HTML/loan_complete";
 	}
 	
 	@GetMapping("/{ISBN}/purchase")
 	public String purchaseBook(Model model, @PathVariable int ISBN) {
-		
+		Purchase p;
+		Optional<Users> user = userService.findById((String)model.getAttribute("mv_username"));
 		Optional<Book> book = bookService.findById(ISBN);
 		
-		Purchase p = new Purchase(book.get(), "");
+
+		List<Purchase> purchases = user.get().getPurchases();
+
+		if(!purchases.isEmpty() && !purchases.get(purchases.size()-1).isPurchased()) {
+			p = purchases.get(purchases.size()-1);
+		}else {
+			p = new Purchase(user.get());
+		}
 		
+		p.getBooks().add(book.get());
+		purchases.add(p);
+		book.get().getPurchases().add(p);
+		
+		//bookService.save(book.get());
 		purchaseService.save(p);
+		userService.save(user.get());
 		
 		model.addAttribute("purchase", p);
 		model.addAttribute("book", book.get());

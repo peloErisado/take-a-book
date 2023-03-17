@@ -1,4 +1,5 @@
 package es.take_a_book.application.model;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -15,13 +16,18 @@ public class Users {
 	private String password;
 	private String mail;
 	private String address;
-
-	@OneToMany(mappedBy="user")
+	
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	private List<Purchase> purchases;
 	@OneToMany(mappedBy="user")
 	private List<Rating> ratings;
-	@OneToOne(mappedBy="user")
-	private Loan loan;
+	@OneToMany(mappedBy="user")
+	private List<Loan> loans;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
+	
 	
 	//Constructor
 	public Users() {
@@ -29,6 +35,10 @@ public class Users {
 	}
 	
 	public Users(String username, String password, String mail, String address) {
+		roles = new ArrayList<String>();
+		loans = new ArrayList<Loan>();
+		purchases = new ArrayList<Purchase>();
+		
 		this.username = username;
 		this.password = password;
 		this.mail = address;
@@ -54,9 +64,13 @@ public class Users {
 	public List<Rating> getRatings(){
 		return ratings;
 	}
-	public Loan getLoan() {
-		return loan;
+	public List<Loan> getLoans() {
+		return loans;
 	}
+	public List<String> getRoles(){
+		return roles;
+	}
+	
 	//Setters
 	public void setUsername(String username) {
 		this.username = username;
@@ -70,7 +84,5 @@ public class Users {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public void setLoan(Loan loan) {
-		this.loan = loan;
-	}
+
 }
