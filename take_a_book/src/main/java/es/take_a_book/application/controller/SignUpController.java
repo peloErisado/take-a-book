@@ -38,8 +38,8 @@ public class SignUpController {
 		Optional<Users> user_ = userService.findById(username);
 		
 		if(user_.isEmpty()) {
-			Users user = new Users(username, mail, address, password);
-			userService.save(new Users(username, mail, address, password));
+			Users user = new Users(username, password, mail, address);
+			userService.save(new Users(username, password, mail, address));
 			model.addAttribute("user", user);
 			return "login_complete";
 		}
