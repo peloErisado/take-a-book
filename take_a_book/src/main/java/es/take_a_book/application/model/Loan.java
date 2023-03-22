@@ -2,6 +2,9 @@ package es.take_a_book.application.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 
 @Entity
 public class Loan {
@@ -13,16 +16,18 @@ public class Loan {
 	private String fechaInicio;
 	private String fechaFin;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Users user;
 	@OneToOne(cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Book book;
 	
 	public Loan() {};
 	
 	//Constructor
-	public Loan(/*Users user,*/ Book book, String fechaInicio, String fechaFin) {
-		//this.user = user;
+	public Loan(Users user, Book book, String fechaInicio, String fechaFin) {
+		this.user = user;
 		this.book = book;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
@@ -49,7 +54,6 @@ public class Loan {
 	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
-	
 	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}

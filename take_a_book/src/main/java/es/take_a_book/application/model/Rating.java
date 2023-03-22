@@ -20,9 +20,9 @@ public class Rating {
 	//Default constructor
 	public Rating() {}
 	//Constructor
-	public Rating(Book book, String description, int ratingScore) {
+	public Rating(Book book, String description, int ratingScore, Users user) {
 		this.book = book;
-		//this.user = user;
+		this.user = user;
 		this.description = description;
 		this.ratingScore = ratingScore;
 	}
