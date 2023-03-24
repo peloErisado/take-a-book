@@ -29,22 +29,28 @@
 				
 		</div>
 		<div style="margin-left:4%;margin-top:1%">
-			<form method="GET" action="{{ISBN}}/edit">
-				<input type="submit" name="action" value="editar">
-			</form>
-			
+			{{#mv_logged}}
 			<form method="GET" action="{{ISBN}}/loan">
 				<input type="submit" name="action" value="pedir préstamo">
+				<input type="hidden" name="username" value="{{mv_username}}">
 			</form>
 			
 			<form method="GET" action="{{ISBN}}/purchase">
 				<input type="submit" name="action" value="comprar">
 			</form>
-
-			<form method="GET" action="{{ISBN}}/remove_confirm">
-				<input type="submit" name="action" value="borrar">
-			</form>
+			{{/mv_logged}}
+			{{#mv_admin}}
+				<form method="GET" action="{{ISBN}}/remove_confirm">
+					<input type="submit" name="action" value="borrar">
+				</form>
+				
+				<form method="GET" action="{{ISBN}}/edit">
+					<input type="submit" name="action" value="editar">
+				</form>
+			{{/mv_admin}}
+			
 		</div>
+		{{#mv_logged}}
 		<div style="margin-top:2%; margin-left:2%">
 			<div style= "margin-bottom:2%">
 				<form method="post" action="/rating_form">	
@@ -65,14 +71,16 @@
 					<p>Haz un comentario: </p>
 					<input type='textarea' name='description'>
 					<input type='submit' value='Aceptar'>
-					<input type='hidden' id= 'hiddenField' name='ISBN' value='{{book.ISBN}}'/>	
+					<input type='hidden' id= 'hiddenField' name='ISBN' value='{{book.ISBN}}'>
+					<input type='hidden' id= 'hiddenField2' name= 'username' value = '{{mv_username}}'>
 				</form>	
 			</div>	
+			{{/mv_logged}}
 			<div style="margin-left:2%">
 				<h2>VALORACIONES</h2>
 					{{#rated}}
 						{{#ratings}}
-							<table> <h3> Comentario {{-index}} </h3>
+							<table> <h3> {{user.username}} </h3>
 							<ul style = "margin-left:1%">
 								<li>Puntuación: {{ratingScore}}/10</li>
 								<li>Comentario: {{description}}</li>
@@ -84,6 +92,7 @@
 						<p> Todavia no hay comentarios para este libro </p>
 					{{/rated}}
 			</div>
+			
 		</div>
 		
 		<div>

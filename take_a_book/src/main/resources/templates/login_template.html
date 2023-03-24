@@ -1,7 +1,7 @@
 <html>
 	{{>header}}
 <body>
-	<form method="get" action="/users/login_form">	<!--el método post hace que los campos recogidos no aparezcan en la url
+	<form method="post" action="/users/login_template">	<!--el método post hace que los campos recogidos no aparezcan en la url
 												si el método es post y se recarga la página, saldrá un aviso preguntando si se desean volver a mandar los parámetros
 												-->	
 	
@@ -18,8 +18,6 @@
 			</div>
 		</div>
 	</form>
-	{{#invalidLogin}}
-	<p style="color:#FF0000";>Nombre de usuario o contraseña incorrectos</p>
-	{{/invalidLogin}}
+
 </body>
 </html>

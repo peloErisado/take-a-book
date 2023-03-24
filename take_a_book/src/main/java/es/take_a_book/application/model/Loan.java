@@ -16,7 +16,7 @@ public class Loan {
 	private String fechaInicio;
 	private String fechaFin;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Users user;
 	@OneToOne(cascade=CascadeType.ALL)
@@ -26,8 +26,8 @@ public class Loan {
 	public Loan() {};
 	
 	//Constructor
-	public Loan(/*Users user,*/ Book book, String fechaInicio, String fechaFin) {
-		//this.user = user;
+	public Loan(Users user, Book book, String fechaInicio, String fechaFin) {
+		this.user = user;
 		this.book = book;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;

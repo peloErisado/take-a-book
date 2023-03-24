@@ -10,14 +10,21 @@
     	</nav>
     	
 		<table>
-			{{#purchases}}
-			<tr>
-					<td><a>Número de compra: {{billNumber}}</a></td>
-						<td><a href="/books/{{book.ISBN}}">Libro: {{book.title}}</a></td>
-					<td>Precio: {{totalPrice}}</td>
-			</tr>
-			{{/purchases}}
+			{{#purchasesExist}}
+				{{#purchases}}
+				<ul style = 'margin-top:1%'>
+						<li><a>Número de compra: {{billNumber}}</a></li>
+						{{#books}}
+							<li><a href="/books/{{ISBN}}">Libro: {{title}} {{price}</a></li>
+						{{/books}}
+						<li>Precio: {{totalPrice}}</li>
+				</ul>
+				{{/purchases}}
+			{{/purchasesExist}}
 			
+			{{^purchasesExist}}
+				<p>No ha realizado todavía ninguna compra</p>
+			{{/purchasesExist}}
 		</table>
 	</body>
 </html>

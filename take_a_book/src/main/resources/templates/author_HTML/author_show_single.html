@@ -17,13 +17,15 @@
 			</ul>
 			{{/books}}
 		</table>
-		{{#author}}
-		<form method="GET" action="{{id}}/edit">
-			<input type="submit" name="action" value="editar">
-		</form>
-		<form method="GET" action="{{id}}/remove_confirm">
-			<input type="submit" name="action" value="borrar">
-		</form>
-		{{/author}}
+		{{#mv_admin}}
+			{{#author}}
+			<form method="GET" action="{{id}}/edit">
+				<input type="submit" name="action" value="editar">
+			</form>
+			<form method="GET" action="{{id}}/remove_confirm">
+				<input type="submit" name="action" value="borrar">
+			</form>
+			{{/author}}
+		{{/mv_admin}}
 	</body>
 </html>

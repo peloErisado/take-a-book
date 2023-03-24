@@ -1,5 +1,6 @@
 package es.take_a_book.application.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -15,23 +16,21 @@ public class Purchase {
 	
 	private float totalPrice = 0;
 	private String payment = "";
-	
+	private boolean purchased = false;
 	@ManyToOne
 	private Users user;
-	@OneToOne
-	private Book book;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<Book> books;
 	
 	public Purchase() {};
 	
 	//Constructor
-	public Purchase(/*Users user,*/Book book, String payment) {
-		/*for(int i = 0; i<books.size(); i++) {
-			totalPrice += books.get(i).getPrice();
-		}*/
-		//this.user = user;
-		totalPrice = book.getPrice();
-		this.book = book;
-		this.payment = payment;
+	public Purchase(Users user) {
+		books = new ArrayList<>();
+		this.user = user;
+
 	}
 	
 	//Getters
@@ -47,12 +46,26 @@ public class Purchase {
 	public Users getUser() {
 		return user;
 	}
-	public Book getBook(){
-		return book;
+	public List<Book> getBooks(){
+		return this.books;
+	}
+	public boolean isPurchased() {
+		return this.purchased;
 	}
 	//Setters
 	public void setPayment(String payment) {
 		this.payment = payment;
+	}
+	public void setPurchased(boolean purchased) {
+		this.purchased = purchased;
+	}
+	
+	//Other methods
+	public void calculateTotalPrice() {
+		totalPrice = 0;
+		for(int i = 0; i<books.size(); i++) {
+			totalPrice+=books.get(i).getPrice();
+		}
 	}
 	
 }

@@ -10,15 +10,19 @@
     	</nav>
     	
 		<table>
-			{{#loans}}
-			<tr>
-					<td><a href="/loan/{{numResguardo}}">Número de resguardo: {{numResguardo}}</a></td>
-					<td><a href="/book/{{book.ISBN}}">{{book.title}}</a></td>
-					<td>Fecha de inicio: {{fechaInicio}}</td>
-					<td>Fecha de fin: {{fechaFin}}</td>
-			</tr>
-			{{/loans}}
-			
+			{{#loansExist}}
+				{{#loans}}
+					<tr>
+							<td><a href="/loan/{{numResguardo}}">Número de resguardo: {{numResguardo}}</a></td>
+							<td><a href="/books/{{book.ISBN}}">{{book.title}}</a></td>
+							<td>Fecha de inicio: {{fechaInicio}}</td>
+							<td>Fecha de fin: {{fechaFin}}</td>
+					</tr>
+				{{/loans}}
+			{{/loansExist}}
+			{{^loansExist}}
+				<p>No hay reservas realizadas aún</p>
+			{{/loansExist}}
 		</table>
 	</body>
 </html>

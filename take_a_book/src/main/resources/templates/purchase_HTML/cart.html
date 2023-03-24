@@ -1,0 +1,20 @@
+<html>
+	{{>header}}
+	<body>
+		{{#anyBook}}
+		<h3>Tu cesta:</h3>
+			<ol>
+				{{#purchase.books}}
+					<li> {{title}} {{price}}</li>
+				{{/purchase.books}}
+			</ol>
+			<p>Precio total: {{purchase.totalPrice}} </p>
+			<form method = 'post' action = '/purchase/finish_purchase'>
+				<input type='submit' value='Realizar compra'>
+			</form>
+		{{/anyBook}}
+		{{^anyBook}}
+			<p>Tu cesta está vacía</p>
+		{{/anyBook}}
+	</body>
+</html>
