@@ -10,9 +10,16 @@ public class Consumer {
 	@Autowired
 	private MailSenderService mailSenderService;
 	
-	@RabbitListener(queues = "mail_queue", ackMode = "AUTO")
-	public void listen(String message) {
+	@RabbitListener(queues = "test_queue", ackMode = "AUTO")
+	public void listenTestQueue(String message) {
 		mailSenderService.sendMail("dieguparalauni@gmail.com", "Test", "Test e-mail");
-		System.out.print("Message received: "+message);
+		System.out.println("Message received: "+message);
+	}
+	
+	@RabbitListener(queues = "mail_queue", ackMode = "AUTO")
+	public void listenMailQueue(String message) {
+		String decodedMessage[] = message.split("|");
+		mailSenderService.sendMail(decodedMessage[0], decodedMessage[1], decodedMessage[2]);
+		System.out.println("Message received: "+message);
 	}
 }
