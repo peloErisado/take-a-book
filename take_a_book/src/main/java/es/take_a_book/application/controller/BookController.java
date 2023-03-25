@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import es.take_a_book.application.internal_service.Producer;
 import es.take_a_book.application.model.Author;
 import es.take_a_book.application.model.Book;
 import es.take_a_book.application.model.Loan;
@@ -47,6 +48,8 @@ public class BookController {
 	private PurchaseService purchaseService;
 	@Autowired 
 	private UserService userService;
+	
+	Producer producer;
 /* Region end */
 
 	
@@ -242,6 +245,9 @@ public class BookController {
 		
 		loanService.save(loan);
 		userService.save(user.get());
+		
+		producer.sendLoanMessage(user.get(), loan);
+		
 		return "loan_HTML/loan_complete";
 	}
 	

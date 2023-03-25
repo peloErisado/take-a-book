@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import es.take_a_book.application.internal_service.Producer;
 import es.take_a_book.application.model.Book;
 import es.take_a_book.application.model.Purchase;
 import es.take_a_book.application.model.Users;
@@ -22,6 +23,9 @@ import es.take_a_book.application.service.BookService;
 @Controller
 @RequestMapping("/purchase")
 public class PurchaseController {
+	
+	@Autowired
+	Producer producer;
 	
 	@Autowired
 	private PurchaseService purchaseService;
@@ -98,14 +102,18 @@ public class PurchaseController {
 		userService.save(user.get());
 		return "/purchase_HTML/thanking_template";
 	}
+	
 	@PostMapping("/finish_purchase/{billNumber}")
 	public String paymentForm(Model model, @PathVariable long billNumber, @RequestParam String payment) {
 		
+		Optional <Users> user = userService.findById((String)model.getAttribute("mv_username"));
 		Optional<Purchase> purchase = purchaseService.findById(billNumber);
 		
 		purchase.get().setPayment(payment);
 		
 		purchaseService.save(purchase.get());
+		
+		producer.sendPurchaseMessage(user.get(), purchase.get());
 		
 		return "redirect:/books";
 	}
