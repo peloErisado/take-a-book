@@ -11,6 +11,7 @@
 			<p>Precio total: {{purchase.totalPrice}} </p>
 			<form method = 'post' action = '/purchase/finish_purchase'>
 				<input type='submit' value='Realizar compra'>
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 			</form>
 		{{/anyBook}}
 		{{^anyBook}}

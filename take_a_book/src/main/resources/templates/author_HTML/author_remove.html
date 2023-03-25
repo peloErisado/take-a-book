@@ -6,6 +6,7 @@
 		<form method="delete" action="/authors/{{id}}/remove">
 			<p>¿Estás segur@ de que quieres borrar al autor {{name}} con id {{id}}?</p>
 			<input type="submit" value="Sí, borrar al autor">
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>
 		{{/author}}
 	</body>

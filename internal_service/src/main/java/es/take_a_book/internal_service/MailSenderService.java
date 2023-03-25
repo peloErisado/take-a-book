@@ -13,14 +13,16 @@ public class MailSenderService {
 	
 	String serviceMail = "takeabook.mail@gmail.com";
 	
-	public void sendMail(String receiver, String subjet, String body) {
+	public void sendMail(String receiver, String subject, String body) {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setFrom(serviceMail);
 		mail.setTo(receiver);
-		mail.setSubject(subjet);
+		mail.setSubject(subject);
 		mail.setText(body);
+		
 		javaMailSender.send(mail);
 		
 		System.out.println("Sending mail to "+receiver);
 	}
+	
 }
