@@ -1,7 +1,7 @@
 <html>
 	{{>header}}
 	<body>
-	<form method="post" action="/users/signup_form">	<!--el método post hace que los campos recogidos no aparezcan en la url
+	<form action="/users/signup_form" method="post">	<!--el método post hace que los campos recogidos no aparezcan en la url
 												//si el método es post y se recarga la página, saldrá un aviso preguntando si se desean volver a mandar los parámetros-->	
 		<div style="margin-left:1%; margin-top:1%">										
 		<h2>Crea tu cuenta</h2>
@@ -21,7 +21,7 @@
 		<input type='radio' name='admin' value='true'> Admin
 		
 		<input type='submit' value='Registrarme'>
-		
+		<input type="hidden" name="_csrf" value="{{token}}"/>
 		
 		</div>
 	</form>

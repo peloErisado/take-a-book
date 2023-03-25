@@ -23,9 +23,10 @@ public class TestController {
 		return ResponseEntity.ok().build();
 	}
 	
-	@PostMapping("/send_mail")
+	
+	/*@PostMapping("/send_mail")
 	public ResponseEntity<Object> sendMail(@RequestParam String mail, @RequestParam String subject, @RequestBody String body){
-		producer.sendMail(mail, subject, body);
+		producer.send(mail, subject, body);
 		return ResponseEntity.ok().build();
-	}
+	}*/
 }

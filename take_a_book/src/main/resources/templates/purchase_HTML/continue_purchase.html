@@ -7,6 +7,7 @@
 		
 		<form method="GET" action="/purchase/{{purchase.billNumber}}">
 				<input type="submit" name="action" value="Aquí">
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>
 	</body>
 </html>

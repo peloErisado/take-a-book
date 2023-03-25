@@ -80,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 					.logoutSuccessUrl("/home");
 		
 		// Disable CSRF at the moment
-		http.csrf().disable();
+		//http.csrf().disable();
 
 	}
 	
