@@ -43,7 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 					.antMatchers("/signup_form").permitAll()
 					.antMatchers("/users/login_template").permitAll()
 					.antMatchers("/users/login_error").permitAll()
-					.antMatchers("/users/logout").permitAll();
+					.antMatchers("/users/logout").permitAll()
+					.antMatchers("/test/*").permitAll();
 
 		
 		//Private pages
