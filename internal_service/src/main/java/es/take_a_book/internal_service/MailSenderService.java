@@ -21,6 +21,6 @@ public class MailSenderService {
 		mail.setText(body);
 		javaMailSender.send(mail);
 		
-		System.out.print("Sending mail to "+receiver);
+		System.out.println("Sending mail to "+receiver);
 	}
 }
