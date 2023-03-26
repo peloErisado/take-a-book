@@ -9,7 +9,7 @@
 				{{/purchase.books}}
 			</ol>
 			<p>Precio total: {{purchase.totalPrice}} </p>
-			<form method = 'post' action = '/purchase/finish_purchase'>
+			<form method = 'GET' action = '/purchase/finish_purchase/{{purchase.billNumber}}'>
 				<input type='submit' value='Realizar compra'>
 				<input type="hidden" name="_csrf" value="{{token}}"/>
 			</form>

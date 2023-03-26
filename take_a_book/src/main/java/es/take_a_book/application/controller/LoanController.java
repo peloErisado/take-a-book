@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import es.take_a_book.application.internal_service.Producer;
 import es.take_a_book.application.model.Loan;
 import es.take_a_book.application.model.Users;
 import es.take_a_book.application.service.LoanService;
@@ -17,9 +19,12 @@ public class LoanController {
 	
 	@Autowired
 	private LoanService loanService;
+	
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private Producer producer;
 	
 	private String path = "loan_HTML/";
 	

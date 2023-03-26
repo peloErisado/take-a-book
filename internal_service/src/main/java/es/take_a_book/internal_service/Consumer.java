@@ -18,7 +18,7 @@ public class Consumer {
 	
 	@RabbitListener(queues = "mail_queue", ackMode = "AUTO")
 	public void listenMailQueue(String message) {
-		String decodedMessage[] = message.split("|");
+		String decodedMessage[] = message.split("§");
 		mailSenderService.sendMail(decodedMessage[0], decodedMessage[1], decodedMessage[2]);
 		System.out.println("Message received: "+message);
 	}

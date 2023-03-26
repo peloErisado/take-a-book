@@ -67,18 +67,14 @@ public class SignUpController {
 		
 		Optional<Users> user_ = userService.findById(username);
 		
-		if(user_.isEmpty()) {
-			Users user = new Users(username, passwordEncoder.encode(password), mail, address);
-			user.getRoles().add("USER");
-			if (admin) user.getRoles().add("ADMIN"); 
-			userService.save(user);
-			model.addAttribute("user", user);
-			
-			producer.sendSignUpMessage(user);
-			
-			return "login_complete";
-		}
+		if(user_.isPresent()) return "sign_up_error";
 		
+		Users user = new Users(username, passwordEncoder.encode(password), mail, address);
+		user.getRoles().add("USER");
+		if (admin) user.getRoles().add("ADMIN"); 
+		userService.save(user);
+		model.addAttribute("user", user);
+		producer.sendSignUpMessage(user);
 		return "login_complete";
 	}
 	

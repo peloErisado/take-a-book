@@ -277,6 +277,6 @@ public class BookController {
 		model.addAttribute("purchase", p);
 		model.addAttribute("book", book.get());
 	
-		return "purchase_HTML/showPurchase";
+		return "purchase_HTML/cart_new_item";
 	}
 }
