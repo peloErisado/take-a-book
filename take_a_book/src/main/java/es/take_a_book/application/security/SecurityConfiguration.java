@@ -56,7 +56,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 					.antMatchers("/books/*/loan").hasAnyRole("USER")
 					.antMatchers("/books/*/purchase").hasAnyRole("USER");
 					
-				
 		//http.authorizeRequests().antMatchers("/users/signup_form").hasAnyRole("USER");
 		//http.authorizeRequests().antMatchers("/users/login_form").hasAnyRole("USER");
 		
@@ -76,8 +75,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.formLogin().failureUrl("/users/login_error");
 		
 		// Logout
-		http.logout().logoutUrl("/users/logout")
-					.logoutSuccessUrl("/home");
+		http.logout().logoutUrl("/users/logout");
+		http.logout().logoutSuccessUrl("/home");
 		
 		// Disable CSRF at the moment
 		//http.csrf().disable();
