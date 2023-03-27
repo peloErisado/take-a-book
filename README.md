@@ -167,5 +167,39 @@ Por último, si el usuario se ha registrado como Admin, podrá acceder a algunas
 
 ## Documentación de la interfaz del servicio interno
 
+La comunicación entre la aplicación y el servicio interno se realiza a través del broker de mensajes RabbitMQ alojado en un contenedor del entorno Docker. Para controlar esta comunicación, se han creado dos colas de mensajes desde las que el servicio interno puede recibir mensajes de la aplicación.
+
+"test_queue": cola de mensajes utilizada para labores de testing y prueba de funcionalidades nuevas. No se usa en el producto final.
+"mail_queue": cola hacia donde se envían todos los mensajes que tienen que ver con el envío de mails a usuarios.
+
+Para hacer uso de estas colas de mensajes se han creado don clases: la clase Producer es la encargada de codificar y enviar toda la información de los mensajes desde la aplicación al servicios interno, mediante que la clase Consumer es la encargada de recibir esos mensajes, decodificarlos y utilizar la información recibida para enviar un correo mediante JavaMail.
+
 ## Instrucciones para desplegar la aplicación
 
+La aplicación se ha diseñado utilizando herramientas Maven y Spring y se ha empaquitado en archivos .jar para su ejecución. Para esta empaquetación se ha utilizado el entorno de de desarrollo Eclipse "Spring Tool Suite", que permite hacer un empaquetado sencillo de la aplicación mediante Maven Install.
+
+Para la base de datos y el la comunicación del servicio interno se han utilizado containers del entorno Docker. Para poder iniciar la base de datos es necesario, primero, instalar Docker en el ordenador. La forma más sencilla de hacerlo es mediante [DockerDesktop](https://www.docker.com/products/docker-desktop/), que ofrece una interfad de usuario sencilla de usar.
+
+Para generar el contenedor de MySQL se ha utilizado la siguiente secuencia en la Shell:
+```ruby
+docker run -p 3306:3006 --name take_a_book -e MYSQL_ROOT_PASSWORD=ppassword
+```
+Esto genera un container de MySQL al que se puede acceder utilizando MySQL Workbench, conectándose a la dirección IP y puerto 3306 del equipo en el que se haya iniciado el contenedor.
+
+Para el intercambio de mensajes entre servicio interno y aplicación se ha utilizado el broker de mensajes RabbitMQ. Este servicios se puede incializar en un contenedor de Docker utilizando la siguiente secuencia:
+```ruby
+docker run --rm -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management
+```
+Con ambos contenedores de Docker inicializados, lo primero que hay que hacer es configurar la base de datos. Para ello habrá que acceder al contenedor de MySQL desde MySQL Workbench e introducir la siguiente secuencia de querys.
+```ruby
+create database take_a_book;
+create user 'adming'@'%' indentified by 'TheyllNeverGuessThisPassword';
+grant all on take_a_book.* to 'admin'@'%';
+```
+Estas Query crean la base de datos take_a_book, donde se crearán automáticamente todas las tablas referentes a los diferentes elementos de la aplicación y crea un usuario admin con todos los permisos asociados.
+
+Una vez hecho esto, ya sólo falta poner en funcionamiento la aplicación. Para eso, una vez empaquetada la aplicación en un .jar, sólo habrá que introducir esta secuando en la Shell desde el fichero donde se encuentre almacenado el .jar.
+```ruby
+java -jar <nombre_del_empaquetado>.jar
+```
+Haciendo esto tanto con el servicio interno como con la aplicación se pone en funcionamiento todas las funcionalidades de la página web.
