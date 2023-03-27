@@ -163,7 +163,13 @@ Por último, si el usuario se ha registrado como Admin, podrá acceder a algunas
 
 ![Pantalla de edición de libro](https://media.discordapp.net/attachments/1074012790051848212/1089925265142063156/image.png?width=895&height=436)
 
+El esquema de navegación de esta fase quedaría de la siguiente forma:
+
+![Diagrama de navegación](https://media.discordapp.net/attachments/689611233586053158/1090058508499685386/Fase3-DiagramaNavegacion.jpg?width=565&height=559)
+
 ## Diagrama de clases y templates
+
+![Diagrama de clases y templates](https://media.discordapp.net/attachments/689611233586053158/1090058508197691422/Fase3-Diagrama_de_clase.jpg?width=382&height=559)
 
 ## Documentación de la interfaz del servicio interno
 
