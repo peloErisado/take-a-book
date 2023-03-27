@@ -23,9 +23,6 @@ public class LoanController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private Producer producer;
-	
 	private String path = "loan_HTML/";
 	
 	//Loans

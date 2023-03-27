@@ -3,6 +3,7 @@ package es.take_a_book.application.controller;
 import java.security.Principal;
 import java.util.Optional;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +56,11 @@ public class LoginController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout() {
+	public String logout(Model model, HttpServletRequest request) throws ServletException {	
+		request.logout();
 		return "logout_template";
 	}
+	
 	
 	
 	/*

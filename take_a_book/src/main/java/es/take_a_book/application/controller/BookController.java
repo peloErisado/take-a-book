@@ -48,7 +48,7 @@ public class BookController {
 	private PurchaseService purchaseService;
 	@Autowired 
 	private UserService userService;
-	
+	@Autowired
 	Producer producer;
 /* Region end */
 
