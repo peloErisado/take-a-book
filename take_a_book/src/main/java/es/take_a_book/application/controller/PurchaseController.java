@@ -65,6 +65,7 @@ public class PurchaseController {
 		if(!purchases.isEmpty()) {
 			Purchase p = purchases.get(purchases.size()-1);
 			p.calculateTotalPrice();
+			purchaseService.save(p);
 			if(!p.isPurchased()) {
 				model.addAttribute("purchase",p);
 				model.addAttribute("anyBook", !p.getBooks().isEmpty());
@@ -88,12 +89,20 @@ public class PurchaseController {
 		} else { 
 			return "errorNotFound";
 		}
+	}
+	
+	@GetMapping("/finish_purchase/{billNumber}")
+	public String finishPurchaseScreen(Model model, @PathVariable long billNumber) {
+		Optional<Purchase> purchase = purchaseService.findById(billNumber);
 		
+		if(purchase.isEmpty()) return "errorNutFound";
+		
+		model.addAttribute("purchase", purchase.get());
+		return "/purchase_HTML/pay_purchase";
 	}
 	
 	@PostMapping("/finish_purchase")
 	public String finishPurchase(Model model) {
-		
 		Optional <Users> user = userService.findById((String)model.getAttribute("mv_username"));
 		List<Purchase> purchases = user.get().getPurchases();
 		Purchase p = purchases.get(purchases.size()-1);
@@ -110,8 +119,10 @@ public class PurchaseController {
 		Optional<Purchase> purchase = purchaseService.findById(billNumber);
 		
 		purchase.get().setPayment(payment);
+		purchase.get().setPurchased(true);
 		
 		purchaseService.save(purchase.get());
+		userService.save(user.get());
 		
 		producer.sendPurchaseMessage(user.get(), purchase.get());
 		

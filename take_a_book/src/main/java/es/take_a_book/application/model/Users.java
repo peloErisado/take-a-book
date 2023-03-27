@@ -41,7 +41,7 @@ public class Users {
 		
 		this.username = username;
 		this.password = password;
-		this.mail = address;
+		this.mail = mail;
 		this.address = address;
 	}
 	
