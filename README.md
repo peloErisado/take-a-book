@@ -15,6 +15,10 @@
  - [Diagrama de navegación](#diagrama-de-navegación) :file_folder:
  - [Diagrama de clases UML](#diagrama-de-clases-UML) :chart:
  - [Diagrama Entidad/Relación](#diagrama-entidad-relación) :floppy_disk:
+ - [Navegación](#navegación) 
+ - [Diagrama de clases y templates](#diagrama-de-clases-y-templates)
+ - [Documentación de la interfaz del servicio interno](#documentación-de-la-interfaz-del-servicio-interno)
+ - [Instrucciones para desplegar la aplicación](#instrucciones-para-desplegar-la-aplicación)
 
 ## Información
 La página web Take a Book es una aplicación de compra y préstamo de libros de todo tipo.
@@ -94,4 +98,74 @@ Durante el desarrollo de este proyecto se hará uso de un tablero de Trello: htt
 
 ![Diagrama de navegación](https://github.com/peloErisado/take-a-book/blob/main/images_Readme/DiagramaER.drawio.png?raw=true)
 
+# Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase III
+
+## Navegación
+En este apartado se van a mostrar las diferentes pantallas con las que cuenta la aplicación hasta este punto del desarrollo. En primer lugar se van a mostrar las pantallas por las que puede navegar un usuario que no se ha registrado:
+
+- Pantalla principal
+
+![Pantalla principal](https://media.discordapp.net/attachments/1074012790051848212/1089922463124684911/image.png?width=907&height=443)
+
+- Pantalla de autores
+
+![Pantalla de autores](https://media.discordapp.net/attachments/1074012790051848212/1079917383029887076/image.png?width=993&height=559)
+
+-Pantalla de un autor concreto
+
+![Pantalla de un autor concreto](https://media.discordapp.net/attachments/1074012790051848212/1089922714724221049/image.png?width=895&height=436)
+
+- Pantalla de libros
+
+![Pantalla de libros](https://media.discordapp.net/attachments/1074012790051848212/1089922563158839356/image.png?width=881&height=431)
+
+- Pantalla de un libro concreto 
+
+![Pantalla de libro](https://media.discordapp.net/attachments/1074012790051848212/1089922923990630531/image.png?width=881&height=430)
+
+- Pantalla de registro
+
+![Pantalla de registro](https://media.discordapp.net/attachments/1074012790051848212/1089922819514716230/image.png?width=881&height=432)
+
+- Pantalla de inicio de sesión
+
+![Pantalla de inicio de sesión](https://media.discordapp.net/attachments/1074012790051848212/1079917469134766151/image.png?width=993&height=559)
+
+Una vez el usuario se ha registrado, tenndrá más funcionalidades en la aplicación. Estas funcionalidades se podrán ver en el header en todo moomento.
+
+-Pantalla principal
+
+![Pantalla principal](https://media.discordapp.net/attachments/1074012790051848212/1089925365822128228/image.png?width=895&height=437)
+
+- Pantalla de mis pedidos
+
+![Pantalla de mis compras](https://media.discordapp.net/attachments/1074012790051848212/1079916200634630214/image.png?width=993&height=559)
+
+- Pantalla de compra
+
+![Pantalla de compra](https://media.discordapp.net/attachments/1074012790051848212/1079917663679168532/image.png?width=993&height=559)
+
+- Pantalla de escribir valoraciones
+
+![Pantalla de escribir valoraciones](https://media.discordapp.net/attachments/1074012790051848212/1089923930845876254/image.png?width=895&height=437)
+
+Por último, si el usuario se ha registrado como Admin, podrá acceder a algunas funcionalidades extra, como pueden ser la edición, añadido o el borrado de libros y autores.
+
+- Pantalla de autores
+
+![Pantalla de autores](https://media.discordapp.net/attachments/1074012790051848212/1089923697223139328/image.png?width=895&height=437)
+
+- Pantalla de autor
+
+![Pantalla de autor](https://media.discordapp.net/attachments/1074012790051848212/1089923773542707250/image.png?width=895&height=436)
+
+- Pantalla de edición de libro
+
+![Pantalla de edición de libro](https://media.discordapp.net/attachments/1074012790051848212/1089925265142063156/image.png?width=895&height=436)
+
+## Diagrama de clases y templates
+
+## Documentación de la interfaz del servicio interno
+
+## Instrucciones para desplegar la aplicación
 
