@@ -54,7 +54,7 @@ public class PurchaseController {
 		}
 		model.addAttribute("purchasesExist", !aux.isEmpty());
 		model.addAttribute("purchases", aux);
-		return "/purchase_HTML/purchase_show_multiple";
+		return "purchase_HTML/purchase_show_multiple";
 	}
 	
 	@GetMapping("/cart")
@@ -75,7 +75,7 @@ public class PurchaseController {
 		}else {
 			model.addAttribute("anyBook", false);
 		}
-		return "/purchase_HTML/cart";
+		return "purchase_HTML/cart";
 	}
 
 	//DISPLAYS: your purchase 
@@ -85,7 +85,7 @@ public class PurchaseController {
 		
 		if (purchase.isPresent()) {
 			model.addAttribute("book", purchase.get());
-			return "/purchase_HTML/showPurchase";
+			return "purchase_HTML/showPurchase";
 		} else { 
 			return "errorNotFound";
 		}
@@ -98,7 +98,7 @@ public class PurchaseController {
 		if(purchase.isEmpty()) return "errorNutFound";
 		
 		model.addAttribute("purchase", purchase.get());
-		return "/purchase_HTML/pay_purchase";
+		return "purchase_HTML/pay_purchase";
 	}
 	
 	@PostMapping("/finish_purchase")
@@ -109,7 +109,7 @@ public class PurchaseController {
 		p.setPurchased(true);
 		purchaseService.save(p);
 		userService.save(user.get());
-		return "/purchase_HTML/thanking_template";
+		return "purchase_HTML/thanking_template";
 	}
 	
 	@PostMapping("/finish_purchase/{billNumber}")
