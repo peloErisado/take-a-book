@@ -41,7 +41,6 @@ public class RatingController {
 			bookService.save(book.get());
 			//model.addAttribute("description", description);
 			return "redirect:/books/" + ISBN;
-			
 		}else {
 			return "errorNotFound";
 		}
