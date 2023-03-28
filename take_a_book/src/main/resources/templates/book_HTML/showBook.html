@@ -73,6 +73,7 @@
 					<input type='submit' value='Aceptar'>
 					<input type='hidden' id= 'hiddenField' name='ISBN' value='{{book.ISBN}}'>
 					<input type='hidden' id= 'hiddenField2' name= 'username' value = '{{mv_username}}'>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>	
 			</div>	
 			{{/mv_logged}}
