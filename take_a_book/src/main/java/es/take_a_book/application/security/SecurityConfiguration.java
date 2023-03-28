@@ -44,7 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 					.antMatchers("/users/login_template").permitAll()
 					.antMatchers("/users/login_error").permitAll()
 					.antMatchers("/users/logout").permitAll()
-					.antMatchers("/test/*").permitAll();
+					.antMatchers("/test/*").permitAll()
+					.antMatchers("/rating_form").permitAll();
 
 		
 		//Private pages
@@ -55,9 +56,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 					.antMatchers("/purchase/cart").hasAnyRole("USER")
 					.antMatchers("/books/*/loan").hasAnyRole("USER")
 					.antMatchers("/books/*/purchase").hasAnyRole("USER");
-					
-		//http.authorizeRequests().antMatchers("/users/signup_form").hasAnyRole("USER");
-		//http.authorizeRequests().antMatchers("/users/login_form").hasAnyRole("USER");
 		
 		http.authorizeRequests().antMatchers("/authors/new").hasAnyRole("ADMIN")
 					.antMatchers("/authors/*/edit").hasAnyRole("ADMIN")
