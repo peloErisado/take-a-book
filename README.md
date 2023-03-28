@@ -49,55 +49,6 @@ Take a Book contará con las siguientes entidades:
 ## Herramientas
 Durante el desarrollo de este proyecto se hará uso de un tablero de Trello: https://trello.com/w/takeabook 
 
-
-# Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase II
-
-## Capturas de pantalla de la aplicación
-
-- Pantalla principal
-
-![Pantalla principal](https://media.discordapp.net/attachments/1074012790051848212/1079916490616221718/image.png?width=993&height=559)
-
-- Pantalla de autores
-
-![Pantalla de autores](https://media.discordapp.net/attachments/1074012790051848212/1079917383029887076/image.png?width=993&height=559)
-
-- Pantalla de libros
-
-![Pantalla de libros](https://media.discordapp.net/attachments/1074012790051848212/1079916030010343594/image.png?width=993&height=559)
-
-- Pantalla de un libro concreto 
-
-![Pantalla de libro](https://media.discordapp.net/attachments/1074012790051848212/1079916135492890645/image.png?width=993&height=559)
-
-- Pantalla de registro
-
-![Pantalla de registro](https://media.discordapp.net/attachments/1074012790051848212/1079917454232391750/image.png?width=993&height=559)
-
-- Pantalla de inicio de sesión
-
-![Pantalla de inicio de sesión](https://media.discordapp.net/attachments/1074012790051848212/1079917469134766151/image.png?width=993&height=559)
-
-- Pantalla de mis pedidos
-
-![Pantalla de mis compras](https://media.discordapp.net/attachments/1074012790051848212/1079916200634630214/image.png?width=993&height=559)
-
-- Pantalla de compra
-
-![Pantalla de compra](https://media.discordapp.net/attachments/1074012790051848212/1079917663679168532/image.png?width=993&height=559)
-
-## Diagrama de navegación
-
-![Diagrama de navegación](https://github.com/peloErisado/take-a-book/blob/main/images_Readme/DiagramaNavegacion.drawio.png?raw=true)
-
-## Diagrama de clases UML
-
-![Diagrama de navegación](https://github.com/peloErisado/take-a-book/blob/main/images_Readme/Diagrama%20de%20clase.drawio.png?raw=true)
-
-## Diagrama Entidad/Relación
-
-![Diagrama de navegación](https://github.com/peloErisado/take-a-book/blob/main/images_Readme/DiagramaER.drawio.png?raw=true)
-
 # Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase III
 
 ## Navegación
@@ -184,28 +135,43 @@ Para hacer uso de estas colas de mensajes se han creado don clases: la clase Pro
 
 La aplicación se ha diseñado utilizando herramientas Maven y Spring y se ha empaquitado en archivos .jar para su ejecución. Para esta empaquetación se ha utilizado el entorno de de desarrollo Eclipse "Spring Tool Suite", que permite hacer un empaquetado sencillo de la aplicación mediante Maven Install.
 
+Creada la máquina virtual y obtenido su par de claves podemos proceder a conectarnos a la misma a través de la Shell de Windows o Ubuntu. Para ello debemos posicionar la Shell en la carpeta con la clave y ejecutar la siguiente sentencia:
+```python
+ssh -i <nombre_de_la_clave>.pem ubuntu@<dirección_de_la_máquina>
+```
+En caso de que la máquina se encuentre correctamente iniciada la Shell se conectará a la máquina virtual y todas las sentencias itroducidas en Shell desde ese momento se ejecutarán en la máquina.
+
 Para la base de datos y el la comunicación del servicio interno se han utilizado containers del entorno Docker. Para poder iniciar la base de datos es necesario, primero, instalar Docker en el ordenador. La forma más sencilla de hacerlo es mediante [DockerDesktop](https://www.docker.com/products/docker-desktop/), que ofrece una interfad de usuario sencilla de usar.
 
+Es posible que sea necesario instalar Docker en la máquina si no se encuentra instalada, para lo que habrá que ejecutar la sentencia:
+```python
+sudo apt install docker
+```
+
 Para generar el contenedor de MySQL se ha utilizado la siguiente secuencia en la Shell:
-```ruby
-docker run -p 3306:3006 --name take_a_book -e MYSQL_ROOT_PASSWORD=ppassword
+```python
+sudo docker run -p 3306:3006 --name take_a_book -e MYSQL_ROOT_PASSWORD=ppassword
 ```
 Esto genera un container de MySQL al que se puede acceder utilizando MySQL Workbench, conectándose a la dirección IP y puerto 3306 del equipo en el que se haya iniciado el contenedor.
 
 Para el intercambio de mensajes entre servicio interno y aplicación se ha utilizado el broker de mensajes RabbitMQ. Este servicios se puede incializar en un contenedor de Docker utilizando la siguiente secuencia:
-```ruby
-docker run --rm -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management
+```python
+sudo docker run --rm -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management
 ```
 Con ambos contenedores de Docker inicializados, lo primero que hay que hacer es configurar la base de datos. Para ello habrá que acceder al contenedor de MySQL desde MySQL Workbench e introducir la siguiente secuencia de querys.
-```ruby
+```python
 create database take_a_book;
 create user 'adming'@'%' indentified by 'TheyllNeverGuessThisPassword';
 grant all on take_a_book.* to 'admin'@'%';
 ```
 Estas Query crean la base de datos take_a_book, donde se crearán automáticamente todas las tablas referentes a los diferentes elementos de la aplicación y crea un usuario admin con todos los permisos asociados.
 
-Una vez hecho esto, ya sólo falta poner en funcionamiento la aplicación. Para eso, una vez empaquetada la aplicación en un .jar, sólo habrá que introducir esta secuando en la Shell desde el fichero donde se encuentre almacenado el .jar.
-```ruby
+Para poder ejecutar la aplicación, primero será necesario empaquetar y subir los proyectos Spring a la máquina virtual. Esto es posible hacerlo con la siguiente sentencia ejecutada en la Shell del ordenador HOST, es decir, el ordenador que contiene el proyecto y no la máquina virtual:
+```python
+scp -i <nombre_de_la_clave>.pem <nombre_de_empaquetado>.jar ubuntu@<dirección_de_la_máquina>:<dirección_destino_del_archivo>
+```
+Una vez hecho esto, ya sólo falta poner en funcionamiento la aplicación. Para eso, una vez empaquetada la aplicación en un .jar, sólo habrá que introducir esta sentencia en la Shell desde el fichero donde se encuentre almacenado el .jar.
+```python
 java -jar <nombre_del_empaquetado>.jar
 ```
 Haciendo esto tanto con el servicio interno como con la aplicación se pone en funcionamiento todas las funcionalidades de la página web.
