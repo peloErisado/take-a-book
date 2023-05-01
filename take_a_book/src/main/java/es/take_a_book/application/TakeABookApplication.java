@@ -1,5 +1,7 @@
 package es.take_a_book.application;
 
+import java.util.Collections;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.Queue;
@@ -9,9 +11,14 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
+
+import com.hazelcast.config.Config;
+import com.hazelcast.config.JoinConfig;
 
 @EnableCaching
 @SpringBootApplication
+@EnableHazelcastHttpSession
 public class TakeABookApplication {
 
 		private static final Log LOG = LogFactory.getLog(TakeABookApplication.class);
@@ -36,6 +43,18 @@ public class TakeABookApplication {
 		return new ConcurrentMapCacheManager("authors", "books");
 	}
 	
+	@Bean
+	public Config config() {
+
+		Config config = new Config();
+		
+		JoinConfig joinConfig = config.getNetworkConfig().getJoin();
+		
+		joinConfig.getMulticastConfig().setEnabled(false);
+		joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("188.65.92.50"));
+
+		return config;
+	}
 	
 	
 	
