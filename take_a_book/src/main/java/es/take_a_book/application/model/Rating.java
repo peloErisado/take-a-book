@@ -14,7 +14,7 @@ public class Rating {
 	
 	@ManyToOne
 	private Users user;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Book book;
 	
 	//Default constructor

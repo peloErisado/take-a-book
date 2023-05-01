@@ -4,11 +4,17 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Author {
+@Table(name = "Author")
+public class Author{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +26,8 @@ public class Author {
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private List<Book> books;
+    @JsonIgnore
+	private List<Book> books = new ArrayList<>();
 	
 	
 	//Constructor
