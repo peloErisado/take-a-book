@@ -17,12 +17,14 @@ public class Users {
 	private String mail;
 	private String address;
 	
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Purchase> purchases;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Rating> ratings;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Loan> loans;
 	
 	@ElementCollection(fetch = FetchType.EAGER)

@@ -12,9 +12,10 @@ public class Rating {
 	private String description;
 	private int ratingScore;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Users user;
-	@ManyToOne
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Book book;
 	
 	//Default constructor
