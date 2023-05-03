@@ -94,10 +94,10 @@ public class AuthorController {
 				//bookService.addAuthor(book_ISBN, author.get());
 			}
 			//bookService.save(book.get());
-			authorService.save(author.get());
+			
 		}
-	
-		return path+"author_show_multiple";
+		authorService.save(author.get());
+		return "redirect:/authors";
 	}
 	
 	@GetMapping("/{id}/remove_confirm")

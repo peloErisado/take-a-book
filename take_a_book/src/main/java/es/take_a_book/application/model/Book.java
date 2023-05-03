@@ -2,17 +2,23 @@ package es.take_a_book.application.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.io.Serializable;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Book {
+public class Book{
 	
 	@Id
 	private int ISBN;
@@ -26,26 +32,30 @@ public class Book {
 	private int year_;
 	private String image;
 	
-	
 	@Lob
 	@JsonIgnore
 	private Blob imageFile;
 	
 	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private List<Author> authors;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Author> authors = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "book", cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private List<Rating> ratings;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Rating> ratings = new ArrayList<>();;
+	
 	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Purchase> purchases;
 	
-
 	
 	//Constructor
 	public Book() {
 	}
+	
 	public Book(int ISBN, String title, String genre, String language, String publisher,	
 				String synopsis, float price, int year) {
 		super();
@@ -58,7 +68,6 @@ public class Book {
 		this.price = price;
 		this.year_ = year;
 	}
-	
 	
 	//Getters
 	public int getISBN() {
@@ -85,9 +94,11 @@ public class Book {
 	public String getSynopsis() {
 		return synopsis;
 	}
+	//@JsonManagedReference
 	public List<Author> getAuthors(){
 		return authors;
 	}
+	//@JsonManagedReference
 	public List<Rating> getRatings(){
 		return ratings;
 	}
@@ -97,6 +108,7 @@ public class Book {
 	public Blob getImageFile() {
 		return imageFile;
 	}
+	@JsonManagedReference
 	public List<Purchase> getPurchases(){
 		return purchases;
 	}

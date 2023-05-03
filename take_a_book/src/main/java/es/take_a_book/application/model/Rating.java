@@ -14,8 +14,8 @@ public class Rating {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Users user;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+  
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Book book;
 	
 	//Default constructor

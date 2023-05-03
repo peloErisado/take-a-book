@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import org.hibernate.Hibernate;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -58,7 +60,8 @@ public class BookController {
 	//DISPLAYS: Every book
 	@GetMapping("")
 	public String getBooks(Model model){
-		model.addAttribute("books", bookService.findAll());
+		List <Book> books =  bookService.findAll();
+		model.addAttribute("books", books);
 		return path+"showBooks";
 	}
 	
@@ -67,7 +70,7 @@ public class BookController {
 	public String getBook(Model model, @PathVariable int ISBN) {
 		
 		Optional<Book> book = bookService.findById(ISBN);
-
+		
 		if (book.isPresent()) {
 			model.addAttribute("book", book.get());
 			model.addAttribute("ratings", book.get().getRatings());
@@ -86,6 +89,7 @@ public class BookController {
 	@GetMapping("/new")
 	public String showAddBookScreen() {
 		return path+"addBook";
+		
 	}
 	
 	//CREATES: A new book
@@ -95,7 +99,7 @@ public class BookController {
 			@RequestParam int year){
 		
 		/*=== Aquí empieza el método ===*/
-		Optional <Book> book = bookService.findById(ISBN);
+		//Optional <Book> book = bookService.findById(ISBN);
 		
 		bookService.save(new Book(ISBN, title, genre, language, publisher, synopsis, price, year));
 		
@@ -140,9 +144,8 @@ public class BookController {
 		if(author.isPresent()) { 
 			bookService.addAuthor(book.get(), author.get());
 		}
-		
 		bookService.save(book.get());
-		return path+"showBooks";
+		return "redirect:/books";
 	}
 	
 	@PostMapping("/{ISBN}/edit/image")
