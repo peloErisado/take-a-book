@@ -3,8 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -17,14 +21,22 @@ public class Users {
 	private String mail;
 	private String address;
 	
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="user")
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private List<Purchase> purchases;
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	
+	@OneToMany(mappedBy="user")
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private List<Rating> ratings;
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	
+	@OneToMany(mappedBy="user")
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private List<Loan> loans;
 	
 	@ElementCollection(fetch = FetchType.EAGER)

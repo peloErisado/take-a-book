@@ -2,6 +2,11 @@ package es.take_a_book.application.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Rating {
 	
@@ -12,7 +17,9 @@ public class Rating {
 	private String description;
 	private int ratingScore;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private Users user;
   
 	@ManyToOne(fetch = FetchType.EAGER)

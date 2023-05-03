@@ -1,45 +1,29 @@
 version: '3'
 services:
-  database-master: 
+  database: 
     image: mysql:8
     hostname: master
-    container_name: database-master
+    container_name: database
     ports:
       - '3306:3306'
     environment:
       - MYSQL_ROOT_PASSWORD=TheyllNeverGuessThisPassword
       - MYSQL_DATABASE=take_a_book
-    volumes:
-      - ./master.cnf:/etc/my.cnf
-  
-  database-slave:
-    image: mysql:8
-    hostname: slave
-    container_name: database-slave
-    ports:
-      - '3307:3306'
-    environment:
-      - MYSQL_ROOT_PASSWORD=TheyllNeverGuessThisPassword
-      - MYSQL_DATABASE=take_a_book
-    volumes:
-      - ./slave.cnf:/etc/my.cnf
-    depends_on:
-      - database-master
-    command:
-      --server-id=2
   
   web:
     build: take_a_book/.
     restart: unless-stopped
+    expose:
+      - '8443'
     environment:
       - SPRING_RABBITMQ_HOST=broker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://database-master/take_a_book
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database/take_a_book
     deploy:
-      mode: replicated
+      mode: loadbalancer
       replicas: 2
     depends_on:
-      - database-slave
-  
+      - database
+
   broker:
     image: rabbitmq
   
@@ -57,5 +41,5 @@ services:
       - "9443:443" # Only service that is exposed to the host is the lb
       - "8181:8181" # Haproxy Stats
     volumes:
-      - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     restart: unless-stopped

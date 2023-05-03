@@ -29,7 +29,4 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 	
 	@CacheEvict(allEntries = true)
 	void delete(Author author);
-	
-	
-
 }

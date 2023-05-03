@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Purchase {
@@ -18,11 +22,13 @@ public class Purchase {
 	private String payment = "";
 	private boolean purchased = false;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Users user;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private List<Book> books;
 	
 	public Purchase() {};
