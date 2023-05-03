@@ -12,8 +12,9 @@ public class Rating {
 	private String description;
 	private int ratingScore;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Users user;
+  
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Book book;
 	

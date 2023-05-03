@@ -17,7 +17,8 @@ public class Purchase {
 	private float totalPrice = 0;
 	private String payment = "";
 	private boolean purchased = false;
-	@ManyToOne
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Users user;
 	
 	@ManyToMany(cascade=CascadeType.ALL)

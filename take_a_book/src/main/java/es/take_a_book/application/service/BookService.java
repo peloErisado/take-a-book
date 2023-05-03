@@ -22,23 +22,28 @@ public class BookService {
 	@Autowired
 	private BookRepository repo;
 	
+	@Transactional(readOnly=true)
 	public List<Book> findAll(){
 		return repo.findAll();
 	}
 
+	@Transactional(readOnly=true)
 	public Optional<Book> findById(int id){
 		return repo.findById(id);
 	}
 	
-	public void save(Book book) {
+	@Transactional(readOnly=false)
+	public void save (Book book) {
 		repo.save(book);
 	}
-
+	
+	@Transactional(readOnly=false)
 	public void delete (Book book) {
 		book.clearAuthors();
 		repo.delete(book);
 	}
 
+	@Transactional(readOnly=false)
 	public void addAuthor (Book book, Author author) {
 		book.addAuthor(author);
 		author.addBook(book);

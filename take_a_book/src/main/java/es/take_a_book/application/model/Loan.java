@@ -17,8 +17,8 @@ public class Loan {
 	private String fechaFin;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Users user;
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Book book;
