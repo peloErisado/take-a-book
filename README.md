@@ -175,3 +175,10 @@ Una vez hecho esto, ya sólo falta poner en funcionamiento la aplicación. Para 
 java -jar <nombre_del_empaquetado>.jar
 ```
 Haciendo esto tanto con el servicio interno como con la aplicación se pone en funcionamiento todas las funcionalidades de la página web.
+
+# Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase IV
+
+## Diagrama de clases y templates
+En este apartado se van a mostrar las diferentes clases y templates que se usan en la aplicación. El único cambio respecto a la anterior fase es que se ha implementado un controlador para la caché.
+
+![Diagrama de clases y templates](https://github.com/peloErisado/take-a-book/blob/main/images_Readme/Fase4-Diagrama%20de%20clase.drawio.png?raw=true)
