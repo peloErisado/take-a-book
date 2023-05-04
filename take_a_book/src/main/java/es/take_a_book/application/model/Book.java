@@ -36,19 +36,20 @@ public class Book{
 	@JsonIgnore
 	private Blob imageFile;
 	
-	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy = "books")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Author> authors = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "book", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "book")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Rating> ratings = new ArrayList<>();;
 	
-	@ManyToMany(mappedBy = "books", cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy = "books")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private List<Purchase> purchases;
 	
 	

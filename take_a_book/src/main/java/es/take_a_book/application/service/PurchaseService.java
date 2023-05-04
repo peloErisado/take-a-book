@@ -2,12 +2,8 @@ package es.take_a_book.application.service;
 
 import java.util.List;
 import java.util.Optional;
-
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import es.take_a_book.application.model.Purchase;
 import es.take_a_book.application.repository.PurchaseRepository;
 
@@ -17,25 +13,15 @@ public class PurchaseService {
 	@Autowired
 	private PurchaseRepository repo;
 	
-	@Transactional(readOnly=true)
 	public List<Purchase> findAll(){
 		return repo.findAll();
 	}
 	
-	@Transactional(readOnly=true)
 	public Optional<Purchase> findById(long id){
 		return repo.findById(id);
 	}
 
-	@Transactional(readOnly=false)
 	public void save (Purchase p) {
 		repo.save(p);
 	}
-	
-	/*
-	public void delete(long id) {
-		repo.deleteById(id);
-	}
-	*/
-	
 }

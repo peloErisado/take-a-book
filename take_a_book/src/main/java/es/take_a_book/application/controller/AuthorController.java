@@ -61,9 +61,9 @@ public class AuthorController {
 	
 	@PostMapping("/new")
 	public String newAuthor(Model model, String name, String surnames, String description) throws IOException{
-		authorService.save(new Author(name, surnames, description));
-		model.addAttribute("authors", authorService.findAll());
-		return path+"author_show_multiple";
+		Author author = new Author(name, surnames, description);
+		authorService.save(author);
+		return "redirect:/authors/"+author.getId();
 	}
 	
 	@GetMapping("/{id}/edit")

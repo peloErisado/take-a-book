@@ -16,22 +16,18 @@ public class RatingService {
 	@Autowired
 	private RatingRepository repo;
 	
-	@Transactional(readOnly=true)
 	public List<Rating> findAll(){
 		return repo.findAll();
 	}
 	
-	@Transactional(readOnly=true)
 	public Optional<Rating> findById(long id){
 		return repo.findById(id);
 	}
 	
-	@Transactional(readOnly=false)
 	public void save (Rating rating) {
 		repo.save(rating);
 	}
 	
-	@Transactional(readOnly=false)
 	public void delete(long id) {
 		repo.deleteById(id);
 	}

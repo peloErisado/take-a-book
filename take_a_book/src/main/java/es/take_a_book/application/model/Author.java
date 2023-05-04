@@ -24,7 +24,7 @@ public class Author{
 	private String surnames;
 	private String description;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.REMOVE)
 	@OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
 	private List<Book> books = new ArrayList<>();

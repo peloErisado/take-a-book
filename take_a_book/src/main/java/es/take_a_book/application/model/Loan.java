@@ -16,10 +16,10 @@ public class Loan {
 	private String fechaInicio;
 	private String fechaFin;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Users user;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Book book;
 	
