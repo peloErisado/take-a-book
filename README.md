@@ -1,4 +1,7 @@
 # TAKE A BOOK
+
+Vídeo demostrativo: https://www.youtube.com/watch?v=FNGIjKucNDI&ab_channel=TakeABook
+
 # Práctica de la asignatura Desarrollo de Aplicaciones Distribuidas - Fase I
 
 ## Índice
